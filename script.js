@@ -112,3 +112,24 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+  const overlay  = document.getElementById('certModal');
+  const modalImg = document.getElementById('certModalImg');
+  const btnClose = document.getElementById('certModalClose');
+
+  document.querySelectorAll('.cert-card[data-cert]').forEach(card => {
+    card.addEventListener('click', () => {
+      modalImg.src = card.dataset.cert;
+      overlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  const fechar = () => {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  };
+
+  btnClose.addEventListener('click', fechar);
+  overlay.addEventListener('click', e => { if (e.target === overlay) fechar(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') fechar(); });
