@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+background:#0b0617;
+font-family:'Poppins',sans-serif;
+padding:20px;
+}
+
+.container{
+width:100%;
+max-width:600px;
+background:#120b24;
+border-radius:24px;
+padding:40px 30px;
+border:1px solid rgba(255,255,255,.05);
+box-shadow:0 30px 80px rgba(0,0,0,.4);
+}
+
+h1{
+color:white;
+margin-bottom:10px;
+}
+
+.sub{
+color:#8d8ca8;
+margin-bottom:30px;
+}
+
+.input-group{
+margin-bottom:18px;
+}
+
+input{
+width:100%;
+padding:15px;
+background:#181028;
+border:1px solid rgba(255,255,255,.08);
+border-radius:14px;
+color:white;
+outline:none;
+}
+
+input:focus{
+border-color:#9b4dff;
+}
+
+.btn{
+width:100%;
+padding:15px;
+border:none;
+border-radius:999px;
+background:linear-gradient(90deg,#7b2cff,#a855f7);
+color:white;
+font-weight:600;
+cursor:pointer;
+margin-top:10px;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-3px);
+}
+
+.msg{
+margin-top:20px;
+padding:14px;
+border-radius:12px;
+font-size:.9rem;
+}
+
+.erro{
+background:rgba(255,0,0,.08);
+border:1px solid rgba(255,0,0,.15);
+color:#ff8d8d;
+}
+
+.sucesso{
+background:rgba(0,255,100,.08);
+border:1px solid rgba(0,255,100,.15);
+color:#7dffb1;
+}
+
+.login-link{
+margin-top:20px;
+text-align:center;
+color:#8d8ca8;
+}
+
+.login-link a{
+color:#b26cff;
+text-decoration:none;
+font-weight:600;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+<h1>Criar conta</h1>
+
+<p class="sub">
+Preencha os dados abaixo.
+</p>
+
+<form id="cadastroForm">
+
+<div class="input-group">
+<input type="text" id="nome" placeholder="Nome completo">
+</div>
+
+<div class="input-group">
+<input type="email" id="email" placeholder="Email">
+</div>
+
+<div class="input-group">
+<input type="date" id="nascimento">
+</div>
+
+<div class="input-group">
+<input type="text" id="nacionalidade" placeholder="Nacionalidade">
+</div>
+
+<div class="input-group">
+<input type="password" id="senha" placeholder="Senha">
+</div>
+
+<div class="input-group">
+<input type="password" id="confirmar" placeholder="Confirmar senha">
+</div>
+
+<button type="submit" class="btn">
+Cadastrar
+</button>
+
+<div id="mensagem"></div>
+
+<div class="login-link">
+Já possui conta?
+<a href="login.html">
+Entrar
+</a>
+</div>
+
+</form>
+
+</div>
+
+<script>
+
+const form = document.getElementById("cadastroForm");
+const mensagem = document.getElementById("mensagem");
+
+form.addEventListener("submit",(e)=>{
+
+e.preventDefault();
+
+const senha = document.getElementById("senha").value;
+const confirmar = document.getElementById("confirmar").value;
+
+if(senha.length < 6){
+
+mensagem.innerHTML = `
+<div class="msg erro">
+A senha deve ter no mínimo 6 caracteres.
+</div>
+`;
+
+return;
+}
+
+if(senha !== confirmar){
+
+mensagem.innerHTML = `
+<div class="msg erro">
+As senhas não coincidem.
+</div>
+`;
+
+return;
+}
+
+mensagem.innerHTML = `
+<div class="msg sucesso">
+Conta criada com sucesso.
+</div>
+`;
+
+setTimeout(()=>{
+
+window.location.href = "login.html";
+
+},1500);
+
+});
+
+</script>
+
+</body>
+</html>

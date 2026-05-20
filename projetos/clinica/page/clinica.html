@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- 🔧 ALTERE: título da aba do navegador -->
+  <title>Clínica Viva Bem | Saúde e Estética com Excelência</title>
+  <!--titulo do navegador quando o cliente sair do site-->
+  <script>
+    const tituloOriginal = document.title;
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) {
+        document.title = "Volta aqui! Temos algo pra você...";
+      } else {
+        document.title = tituloOriginal;
+      }
+    });
+  </script>
+
+  <meta name="description" content="Cuidados de saúde e estética com tecnologia moderna e atendimento humanizado. Agende sua consulta hoje." />
+
+  <!-- Google Fonts: Cormorant Garamond (elegante/luxo) + DM Sans (leitura limpa) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<!--favicon-->
+<link rel="icon" type="image/png" href="../imgs/image-ViY6rawiI2uiV9tsy3QGZXdyngtXrC.png">
+  <link rel="stylesheet" href="../page/clinica.css"/>
+</head>
+<body>
+
+  <!-- =============================================
+    🔝 HEADER FIXO — sempre visível ao rolar
+    Transparente no topo, sólido ao fazer scroll
+  ============================================= -->
+  <header id="header">
+    <div class="header-inner container">
+      <!-- 🔧 ALTERE: nome da clínica -->
+      <a href="#" class="logo">
+        <span class="logo-icon">✦</span>
+        <span>Viva <strong>Bem</strong></span>
+      </a>
+
+      <nav class="nav" id="nav">
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+
+      <!-- 🔧 ALTERE: link do WhatsApp (substitua 5511999999999 pelo número real) -->
+      <a href="agendamento/agendamento.html" 
+         class="btn-header" target="_blank" rel="noopener">
+        Agendar consulta
+      </a>
+
+      <!-- Botão hamburguer para mobile -->
+      <button class="hamburger" id="hamburger" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- =============================================
+    🦸 HERO — primeira seção, decisiva para conversão
+    Deve capturar atenção em menos de 3 segundos
+  ============================================= -->
+  <section class="hero" id="inicio">
+    <!-- Fundo decorativo: círculos suaves para dar profundidade -->
+    <div class="hero-bg">
+      <div class="hero-circle c1"></div>
+      <div class="hero-circle c2"></div>
+      <div class="hero-circle c3"></div>
+    </div>
+
+    <div class="hero-content container">
+      <div class="hero-text">
+        <!-- Tag de credibilidade acima do título -->
+        <span class="hero-tag animate-fade-up" style="animation-delay:.1s">
+          ✦ Referência em saúde & estética
+        </span>
+
+        <!-- 🔧 ALTERE: título principal — foco no BENEFÍCIO, não no serviço -->
+        <h1 class="hero-title animate-fade-up" style="animation-delay:.25s">
+          Cuide-se com quem<br>
+          <em>realmente entende</em><br>
+          de você
+        </h1>
+
+        <!-- 🔧 ALTERE: subtítulo — reforce a proposta de valor -->
+        <p class="hero-sub animate-fade-up" style="animation-delay:.4s">
+          Tratamentos personalizados, tecnologia de ponta e um atendimento
+          que coloca você no centro de tudo. Porque você merece sentir o melhor de si.
+        </p>
+
+        <!-- CTAs principais: dois botões com hierarquia visual clara -->
+        <div class="hero-actions animate-fade-up" style="animation-delay:.55s">
+          <!-- 🔧 ALTERE: link WhatsApp -->
+          <a href="https://wa.me/5511999999999?text=Quero%20agendar%20minha%20consulta!" 
+             class="btn-primary" target="_blank" rel="noopener">
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+            </svg>
+            Agendar pelo WhatsApp
+          </a>
+          <a href="#servicos" class="btn-ghost">
+            Conhecer serviços →
+          </a>
+        </div>
+
+        <!-- Mini prova social no hero -->
+        <div class="hero-social-proof animate-fade-up" style="animation-delay:.7s">
+          <div class="avatars">
+            <img src="../imgs/mulher-1.jpg" class="avatar">
+            <img src="../imgs/mulher-2.jpg" class="avatar">
+            <img src="../imgs/mulher-3.jpg" class="avatar">
+          </div>
+          <p><strong>+2.000 pacientes</strong> transformados nos últimos 5 anos</p>
+        </div>
+      </div>
+
+      <!-- Imagem hero + card flutuante de credibilidade -->
+      <div class="hero-visual animate-fade-up" style="animation-delay:.35s">
+        <!-- 🔧 ALTERE: substitua o src pela foto real da clínica ou médico -->
+        <div class="hero-img-wrap">
+          <img src="../imgs/estetica.jpg" 
+               alt="Equipe da Clínica Viva Bem" loading="eager" />
+          <div class="hero-badge">
+            <span class="badge-icon">🏆</span>
+            <div>
+              <strong>Top Clínica 2024</strong>
+              <small>Melhor avaliada da região</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Indicador de scroll para guiar o usuário -->
+    <a href="#diferenciais" class="scroll-hint" aria-label="Rolar para baixo">
+      <span></span>
+    </a>
+  </section>
+
+
+  <!-- =============================================
+    ⭐ DIFERENCIAIS — seção de confiança
+    Apresenta o "por que escolher" de forma rápida
+  ============================================= -->
+  <section id="diferenciais" class="section-diferenciais">
+    <div class="container">
+      <!-- 4 cards com os principais diferenciais -->
+      <!-- 🔧 ALTERE: ícones, títulos e descrições conforme sua clínica -->
+      <div class="diferenciais-grid">
+
+        <div class="card-diferencial reveal">
+          <div class="card-icon">👨‍⚕️</div>
+          <h3>Equipe especializada</h3>
+          <p>Profissionais com formação contínua e anos de experiência para garantir o melhor resultado para você.</p>
+        </div>
+
+        <div class="card-diferencial reveal" style="transition-delay:.1s">
+          <div class="card-icon">💎</div>
+          <h3>Tecnologia de ponta</h3>
+          <p>Equipamentos modernos e aprovados pela Anvisa para tratamentos seguros, eficazes e com resultados duradouros.</p>
+        </div>
+
+        <div class="card-diferencial reveal" style="transition-delay:.2s">
+          <div class="card-icon">❤️</div>
+          <h3>Atendimento humanizado</h3>
+          <p>Cada paciente é único. Aqui você é ouvido, respeitado e recebe um plano de cuidado exclusivo para sua necessidade.</p>
+        </div>
+
+        <div class="card-diferencial reveal" style="transition-delay:.3s">
+          <div class="card-icon">🔒</div>
+          <h3>Ambiente seguro</h3>
+          <p>Clínica com protocolos rigorosos de higiene, conforto e privacidade para que você se sinta seguro em cada visita.</p>
+        </div>
+
+      </div>
+
+      <!-- Barra de números/estatísticas — gera autoridade instantânea -->
+      <div class="stats-bar">
+        <!-- 🔧 ALTERE: números reais da sua clínica -->
+        <div class="stat reveal">
+          <span class="stat-num" data-target="2000">0</span><span class="stat-suf">+</span>
+          <p>Pacientes atendidos</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat reveal" style="transition-delay:.1s">
+          <span class="stat-num" data-target="8">0</span><span class="stat-suf"> anos</span>
+          <p>De experiência</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat reveal" style="transition-delay:.2s">
+          <span class="stat-num stat-decimal" data-target="4.9">0</span><span class="stat-suf">★</span>
+          <p>Avaliação média</p>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat reveal" style="transition-delay:.3s">
+          <span class="stat-num" data-target="98">0</span><span class="stat-suf">%</span>
+          <p>Pacientes satisfeitos</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+    🏥 SOBRE — história + missão + autoridade
+    Humaniza a clínica e cria conexão emocional
+  ============================================= -->
+  <section id="sobre" class="section-sobre">
+    <div class="container sobre-grid">
+      <!-- Imagem da clínica ou da equipe -->
+      <div class="sobre-visual reveal">
+        <!-- 🔧 ALTERE: foto real da clínica ou do médico responsável -->
+        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80" 
+             alt="Clínica Viva Bem por dentro" loading="lazy" />
+        <!-- Card de destaque sobre a imagem -->
+        <div class="sobre-card-float">
+          <span>✦</span>
+          <div>
+            <strong>Fundada em 2016</strong>
+            <small>Com amor pelo cuidado humano</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="sobre-text">
+        <span class="section-label reveal">Quem somos</span>
+        <!-- 🔧 ALTERE: título da seção sobre -->
+        <h2 class="section-title reveal">Nascemos para<br>cuidar de <em>pessoas</em></h2>
+
+        <!-- 🔧 ALTERE: história e missão da clínica -->
+        <p class="reveal" style="transition-delay:.1s">
+          A Clínica Viva Bem nasceu em 2016 com um propósito claro: oferecer tratamentos de excelência em um ambiente acolhedor, onde cada paciente se sente em casa.
+        </p>
+        <p class="reveal" style="transition-delay:.2s">
+          Hoje, somos referência regional em saúde e estética, com uma equipe multidisciplinar dedicada a entregar resultados reais — sem atalhos, sem promessas vazias.
+        </p>
+
+        <!-- Pilares: missão, visão, valores em formato visual -->
+        <div class="pilares reveal" style="transition-delay:.3s">
+          <div class="pilar">
+            <strong>Missão</strong>
+            <p>Cuidar com ética, ciência e empatia.</p>
+          </div>
+          <div class="pilar">
+            <strong>Visão</strong>
+            <p>Ser a clínica mais confiada da região.</p>
+          </div>
+          <div class="pilar">
+            <strong>Valores</strong>
+            <p>Respeito, transparência e inovação.</p>
+          </div>
+        </div>
+
+        <!-- CTA dentro da seção sobre -->
+        <a href="#contato" class="btn-primary reveal" style="transition-delay:.4s">
+          Conheça nossa equipe →
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+    💊 SERVIÇOS — o que a clínica oferece
+    Apresentados como soluções, não como procedimentos
+  ============================================= -->
+  <section id="servicos" class="section-servicos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label reveal">Nossos serviços</span>
+        <!-- 🔧 ALTERE: título da seção de serviços -->
+        <h2 class="section-title reveal">Soluções completas<br>para o seu <em>bem-estar</em></h2>
+        <p class="section-desc reveal">
+          Cada tratamento é cuidadosamente planejado para o seu perfil e objetivos. Conheça o que podemos fazer por você.
+        </p>
+      </div>
+
+      <!-- Grid de serviços — 3 colunas no desktop, 1 no mobile -->
+      <!-- 🔧 ALTERE: serviços, ícones, títulos, descrições e preços conforme sua clínica -->
+      <div class="servicos-grid">
+
+        <div class="card-servico reveal">
+          <div class="servico-header">
+            <span class="servico-icon">🌿</span>
+            <span class="servico-tag">Mais procurado</span>
+          </div>
+          <h3>Consulta Clínica</h3>
+          <p>Avaliação completa do seu estado de saúde com plano de tratamento individualizado e acompanhamento contínuo.</p>
+          <ul class="servico-lista">
+            <li>✓ Anamnese detalhada</li>
+            <li>✓ Exames inclusos</li>
+            <li>✓ Retorno garantido</li>
+          </ul>
+          <a href="#contato" class="servico-link">Agendar agora →</a>
+        </div>
+
+        <div class="card-servico destaque reveal" style="transition-delay:.1s">
+          <div class="servico-header">
+            <span class="servico-icon">✨</span>
+            <span class="servico-tag destaque-tag">Recomendado</span>
+          </div>
+          <h3>Estética Facial</h3>
+          <p>Protocolos avançados para rejuvenescimento, limpeza de pele, harmonização e tratamentos de vanguarda.</p>
+          <ul class="servico-lista">
+            <li>✓ Avaliação facial grátis</li>
+            <li>✓ Protocolos personalizados</li>
+            <li>✓ Resultados visíveis</li>
+          </ul>
+          <a href="#contato" class="servico-link">Agendar agora →</a>
+        </div>
+
+        <div class="card-servico reveal" style="transition-delay:.2s">
+          <div class="servico-header">
+            <span class="servico-icon">💪</span>
+            <span class="servico-tag">Novidade</span>
+          </div>
+          <h3>Estética Corporal</h3>
+          <p>Modelagem corporal, redução de medidas e firmeza da pele com as tecnologias mais modernas do mercado.</p>
+          <ul class="servico-lista">
+            <li>✓ Avaliação corporal completa</li>
+            <li>✓ Equipamentos certificados</li>
+            <li>✓ Pacotes especiais</li>
+          </ul>
+          <a href="#contato" class="servico-link">Agendar agora →</a>
+        </div>
+
+        <div class="card-servico reveal" style="transition-delay:.3s">
+          <div class="servico-header">
+            <span class="servico-icon">🧬</span>
+            <span class="servico-tag">Premium</span>
+          </div>
+          <h3>Medicina Integrativa</h3>
+          <p>Abordagem holística que une medicina tradicional e integrativa para tratar a causa, não só os sintomas.</p>
+          <ul class="servico-lista">
+            <li>✓ Tratamento multidisciplinar</li>
+            <li>✓ Nutrição funcional</li>
+            <li>✓ Saúde do sono</li>
+          </ul>
+          <a href="#contato" class="servico-link">Agendar agora →</a>
+        </div>
+
+        <div class="card-servico reveal" style="transition-delay:.4s">
+          <div class="servico-header">
+            <span class="servico-icon">🦷</span>
+            <span class="servico-tag">Especialidade</span>
+          </div>
+          <h3>Saúde da Pele</h3>
+          <p>Dermatologia clínica e estética para diagnóstico, prevenção e tratamento de todas as condições cutâneas.</p>
+          <ul class="servico-lista">
+            <li>✓ Dermoscopia digital</li>
+            <li>✓ Tratamento de acne e manchas</li>
+            <li>✓ Controle do envelhecimento</li>
+          </ul>
+          <a href="#contato" class="servico-link">Agendar agora →</a>
+        </div>
+
+        <div class="card-servico reveal" style="transition-delay:.5s">
+          <div class="servico-header">
+            <span class="servico-icon">🧘</span>
+            <span class="servico-tag">Bem-estar</span>
+          </div>
+          <h3>Bem-Estar Mental</h3>
+          <p>Psicologia, mindfulness e gestão do estresse para equilíbrio emocional e qualidade de vida plena.</p>
+          <ul class="servico-lista">
+            <li>✓ Psicólogos especializados</li>
+            <li>✓ Sessões presenciais e online</li>
+            <li>✓ Sigilo garantido</li>
+          </ul>
+          <a href="#contato" class="servico-link">Agendar agora →</a>
+        </div>
+
+      </div>
+
+      <!-- CTA abaixo da grade de serviços -->
+      <div class="servicos-cta reveal">
+        <p>Não encontrou o que procura? Fale conosco — temos solução para você.</p>
+        <!-- 🔧 ALTERE: link WhatsApp -->
+        <a href="https://wa.me/5511999999999?text=Tenho%20uma%20dúvida%20sobre%20os%20serviços" 
+           class="btn-primary" target="_blank" rel="noopener">
+          Falar com especialista
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+    🚀 BANNER CTA INTERMEDIÁRIO
+    Urgência leve + incentivo para ação imediata
+  ============================================= -->
+  <section class="section-cta-banner">
+    <div class="container cta-banner-inner">
+      <div class="reveal">
+        <!-- 🔧 ALTERE: oferta ou urgência real da clínica -->
+        <span class="cta-tag">⏰ Oferta por tempo limitado</span>
+        <h2>Consulta de avaliação<br><em>gratuita</em> essa semana</h2>
+        <p>Agende agora e ganhe uma avaliação completa sem custo. Vagas limitadas.</p>
+      </div>
+      <div class="reveal" style="transition-delay:.2s">
+        <!-- 🔧 ALTERE: link WhatsApp -->
+        <a href="https://wa.me/5511999999999?text=Quero%20minha%20avaliação%20gratuita!" 
+           class="btn-white" target="_blank" rel="noopener">
+          Garantir minha vaga grátis
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+        <small>Sem compromisso • 100% gratuito</small>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+    💬 DEPOIMENTOS — prova social
+    ESSENCIAL para conversão — gera confiança real
+  ============================================= -->
+  <section id="depoimentos" class="section-depoimentos">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label reveal">Depoimentos</span>
+        <h2 class="section-title reveal">O que nossos pacientes<br>dizem sobre <em>nós</em></h2>
+        <p class="section-desc reveal">Resultados reais de pessoas reais. Sem filtros.</p>
+      </div>
+
+      <!-- Grid de depoimentos -->
+      <!-- 🔧 ALTERE: depoimentos reais dos seus pacientes (com autorização) -->
+      <div class="depoimentos-grid">
+
+        <div class="card-depo reveal">
+          <div class="depo-stars">★★★★★</div>
+          <p>"Jamais pensei que um tratamento estético pudesse mudar tanto minha autoestima. A equipe da Viva Bem é incrível — profissional, cuidadosa e transparente do início ao fim."</p>
+          <div class="depo-autor">
+            <div class="depo-avatar">
+              <img src="../imgs/mulher-1.jpg" class="depo-avatar">
+            </div>
+            <div>
+              <strong>Ana Martins</strong>
+              <small>Paciente desde 2022</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-depo destaque-depo reveal" style="transition-delay:.1s">
+          <div class="depo-stars">★★★★★</div>
+          <p>"Fui com muito medo, mas o atendimento me deixou completamente à vontade. O resultado do tratamento facial superou todas as minhas expectativas. Recomendo demais!"</p>
+          <div class="depo-autor">
+            <div class="depo-avatar">
+              <img src="../imgs/homem-1.jpg" class="depo-avatar">
+            </div>
+            <div>
+              <strong>Carlos Lima</strong>
+              <small>Paciente desde 2021</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-depo reveal" style="transition-delay:.2s">
+          <div class="depo-stars">★★★★★</div>
+          <p>"Finalmente encontrei uma clínica que trata a gente como pessoa, não como número. Me sinto cuidada, ouvida e muito bem orientada em cada consulta."</p>
+          <div class="depo-autor">
+            <div class="depo-avatar">
+              <img src="../imgs/mulher-2.jpg" class="depo-avatar">
+            </div>
+            <div>
+              <strong>Renata Souza</strong>
+              <small>Paciente desde 2023</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-depo reveal" style="transition-delay:.3s">
+          <div class="depo-stars">★★★★★</div>
+          <p>"A diferença que o tratamento fez na minha pele em apenas 2 meses foi surpreendente. Equipe super qualificada e ambiente muito agradável. Voltarei sempre!"</p>
+          <div class="depo-autor">
+            <div class="depo-avatar">
+              <img src="../imgs/mulher-3.jpg" class="depo-avatar">
+            </div>
+            <div>
+              <strong>Paula Ferreira</strong>
+              <small>Paciente desde 2023</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-depo reveal" style="transition-delay:.4s">
+          <div class="depo-stars">★★★★★</div>
+          <p>"Profissionalismo impecável! Cada detalhe foi pensado para o meu conforto. Os resultados falam por si — estou me sentindo 10 anos mais jovem!"</p>
+          <div class="depo-autor">
+            <div class="depo-avatar">
+              <img src="../imgs/homem-2.jpg" class="depo-avatar">
+            </div>
+            <div>
+              <strong>Marcos Oliveira</strong>
+              <small>Paciente desde 2020</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-depo reveal" style="transition-delay:.5s">
+          <div class="depo-stars">★★★★★</div>
+          <p>"Indiquei para toda a minha família e todos tiveram ótimas experiências. É raro encontrar uma clínica com tanto cuidado e resultado ao mesmo tempo."</p>
+          <div class="depo-autor">
+            <div class="depo-avatar">
+              <img src="../imgs/mulher-4.jpg" class="depo-avatar">
+            </div>
+            <div>
+              <strong>Lucia Braga</strong>
+              <small>Paciente desde 2022</small>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =============================================
+    📬 CONTATO — seção final de conversão
+    Formulário simples + múltiplos canais de contato
+  ============================================= -->
+  <section id="contato" class="section-contato">
+    <div class="container contato-grid">
+
+      <!-- Lado esquerdo: info de contato + motivação -->
+      <div class="contato-info">
+        <span class="section-label reveal">Entre em contato</span>
+        <h2 class="section-title reveal">Dê o primeiro passo<br>para o seu <em>bem-estar</em></h2>
+        <p class="reveal">
+          Estamos prontos para te atender e ajudar a encontrar o melhor caminho para a sua saúde e autoestima. Não adie o cuidado que você merece.
+        </p>
+
+        <!-- Cards de contato com hover interativo -->
+        <!-- 🔧 ALTERE: dados de contato reais -->
+        <div class="contato-cards">
+
+          <a href="https://wa.me/5511999999999" class="contato-card reveal" target="_blank" rel="noopener">
+            <div class="contato-card-icon">
+              <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+            </div>
+            <div>
+              <strong>WhatsApp</strong>
+              <!-- 🔧 ALTERE: número real -->
+              <span>(11) 99999-9999</span>
+            </div>
+            <span class="contato-card-seta">→</span>
+          </a>
+
+          <a href="tel:+551133333333" class="contato-card reveal" style="transition-delay:.1s">
+            <div class="contato-card-icon">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Telefone</strong>
+              <!-- 🔧 ALTERE: telefone real -->
+              <span>(11) 3333-3333</span>
+            </div>
+            <span class="contato-card-seta">→</span>
+          </a>
+
+          <div class="contato-card reveal" style="transition-delay:.2s; cursor:default">
+            <div class="contato-card-icon">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Endereço</strong>
+              <!-- 🔧 ALTERE: endereço real -->
+              <span>Rua das Flores, 123 — São Paulo, SP</span>
+            </div>
+          </div>
+
+          <div class="contato-card reveal" style="transition-delay:.3s; cursor:default">
+            <div class="contato-card-icon">
+              <svg width="22" height="22" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <strong>Horário de atendimento</strong>
+              <!-- 🔧 ALTERE: horários reais -->
+              <span>Seg–Sex: 8h–19h • Sáb: 8h–13h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lado direito: formulário de agendamento -->
+      <div class="contato-form-wrap reveal">
+        <form class="form-agendamento" id="formAgendamento" novalidate>
+          <h3>Agende sua consulta</h3>
+          <p class="form-sub">Preencha abaixo e entraremos em contato em até 2 horas.</p>
+
+          <!-- 🔧 O formulário é funcional visualmente; para enviar de verdade,
+               conecte a um backend, Formspree, Netlify Forms ou similar -->
+          <div class="form-group">
+            <label for="nome">Seu nome *</label>
+            <input type="text" id="nome" name="nome" placeholder="Como posso te chamar?" required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telefone">WhatsApp *</label>
+              <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="seu@email.com" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="servico">Serviço de interesse *</label>
+            <select id="servico" name="servico" required>
+              <option value="">Selecione um serviço</option>
+              <!-- 🔧 ALTERE: serviços reais da clínica -->
+              <option>Consulta Clínica</option>
+              <option>Estética Facial</option>
+              <option>Estética Corporal</option>
+              <option>Medicina Integrativa</option>
+              <option>Saúde da Pele</option>
+              <option>Bem-Estar Mental</option>
+              <option>Não sei ainda — quero orientação</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="mensagem">Mensagem (opcional)</label>
+            <textarea id="mensagem" name="mensagem" rows="3" placeholder="Conte um pouco sobre o que você busca..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary btn-full">
+            Solicitar agendamento →
+          </button>
+
+          <p class="form-privacy">🔒 Seus dados são tratados com total sigilo e privacidade.</p>
+        </form>
+
+        <!-- Mensagem de sucesso (oculta até o envio) -->
+        <div class="form-success" id="formSuccess" style="display:none">
+          <span class="success-icon">✓</span>
+          <h3>Solicitação recebida!</h3>
+          <p>Entraremos em contato em até 2 horas pelo seu WhatsApp. Obrigado pela confiança! 💚</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =============================================
+    🦶 FOOTER — rodapé profissional
+  ============================================= -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <span class="logo-icon">✦</span>
+          <!-- 🔧 ALTERE: nome da clínica -->
+          <span>Viva <strong>Bem</strong></span>
+        </a>
+        <p>Cuidando de você com<br>ciência, tecnologia e carinho.</p>
+      </div>
+
+      <div class="footer-links">
+        <strong>Navegação</strong>
+        <a href="#sobre">Sobre nós</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato">Contato</a>
+      </div>
+
+      <div class="footer-links">
+        <strong>Serviços</strong>
+        <!-- 🔧 ALTERE: serviços reais -->
+        <a href="#servicos">Consulta Clínica</a>
+        <a href="#servicos">Estética Facial</a>
+        <a href="#servicos">Estética Corporal</a>
+        <a href="#servicos">Saúde da Pele</a>
+      </div>
+
+      <div class="footer-contato">
+        <strong>Contato</strong>
+        <!-- 🔧 ALTERE: dados reais -->
+        <a href="https://wa.me/5511999999999" target="_blank" rel="noopener">(11) 99999-9999</a>
+        <a href="tel:+551133333333">(11) 3333-3333</a>
+        <span>Rua das Flores, 123<br>São Paulo – SP</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom container">
+      <!-- 🔧 ALTERE: nome/CNPJ/ano conforme necessário -->
+      <p>© 2026 Clínica Viva Bem. Todos os direitos reservados.</p>
+      <p>
+        Site Desenvolvido por 
+        <a href="https://miguelpoquiviqui.github.io/miguel/" target="_blank" class="credit-link">
+          Miguel da Silva Poquiviqui
+        </a>
+      </p>
+      <style>
+        .credit-link {
+          position: relative;
+          color: #ffffff;
+          text-decoration: none;
+          transition: 0.3s;
+        }
+      
+        .credit-link:hover {
+          color: #8A2BE2;
+        }
+      
+        .credit-link::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -2px;
+          width: 0;
+          height: 2px;
+          background: #9370DB;
+          transition: 0.3s;
+        }
+      
+        .credit-link:hover::after {
+          width: 100%;
+        }
+      </style>
+    </div>
+  </footer>
+
+
+  <!-- =============================================
+    💬 BOTÃO FLUTUANTE DE WHATSAPP
+    Sempre visível, para conversão a qualquer momento
+  ============================================= -->
+  <!-- BOTÃO FLUTUANTE WHATSAPP -->
+<a href="javascript:void(0)" 
+class="whatsapp-float"
+onclick="toggleChat()"
+aria-label="Abrir chat">
+
+<svg width="28" height="28" fill="currentColor" viewBox="0 0 24 24">
+ <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+</svg>
+
+<span class="whatsapp-tooltip">Fale conosco agora!</span>
+</a>
+
+<!-- CHAT -->
+<div class="chat-box" id="chatBox">
+
+<div class="chat-header">
+ <h4>Clínica Saúde+</h4>
+ <button onclick="toggleChat()">✕</button>
+</div>
+
+<div class="chat-body" id="chatBody">
+
+ <div class="bot-message">
+   Olá 👋<br>
+   Como podemos ajudar?
+ </div>
+
+ <button onclick="sendQuestion('horario')">
+   Horário de funcionamento
+ </button>
+
+ <button onclick="sendQuestion('consulta')">
+   Como agendar consulta?
+ </button>
+
+ <button onclick="sendQuestion('convenio')">
+   Aceita convênio?
+ </button>
+
+ <button onclick="sendQuestion('endereco')">
+   Qual endereço?
+ </button>
+
+</div>
+
+</div>
+
+<style>
+.whatsapp-float{
+ position:fixed;
+ width:60px;
+ height:60px;
+ bottom:20px;
+ right:20px;
+ background:#25D366;
+ color:#fff;
+ border-radius:50%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-decoration:none;
+ box-shadow:0 8px 25px rgba(0,0,0,0.2);
+ z-index:9999;
+ transition:.3s;
+}
+
+.whatsapp-float:hover{
+ transform:scale(1.08);
+}
+
+.whatsapp-tooltip{
+ position:absolute;
+ right:70px;
+ background:#111;
+ color:#fff;
+ padding:8px 12px;
+ border-radius:8px;
+ font-size:13px;
+ white-space:nowrap;
+ opacity:0;
+ transition:.3s;
+}
+
+.whatsapp-float:hover .whatsapp-tooltip{
+ opacity:1;
+}
+
+.chat-box{
+ position:fixed;
+ bottom:95px;
+ right:20px;
+ width:320px;
+ background:#fff;
+ border-radius:18px;
+ overflow:hidden;
+ box-shadow:0 10px 35px rgba(0,0,0,0.18);
+ z-index:9999;
+
+ opacity:0;
+ visibility:hidden;
+ transform:translateY(20px);
+ transition:.3s;
+}
+
+.chat-box.active{
+ opacity:1;
+ visibility:visible;
+ transform:translateY(0);
+}
+
+.chat-header{
+ background:#25D366;
+ color:#fff;
+ padding:15px;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+}
+
+.chat-header h4{
+ margin:0;
+ font-size:16px;
+}
+
+.chat-header button{
+ background:none;
+ border:none;
+ color:#fff;
+ font-size:18px;
+ cursor:pointer;
+}
+
+.chat-body{
+ padding:15px;
+ display:flex;
+ flex-direction:column;
+ gap:10px;
+ background:#f5f5f5;
+}
+
+.bot-message{
+ background:#fff;
+ padding:12px;
+ border-radius:12px;
+ font-size:14px;
+ line-height:1.5;
+}
+
+.chat-body button{
+ border:none;
+ background:#25D366;
+ color:#fff;
+ padding:12px;
+ border-radius:10px;
+ cursor:pointer;
+ font-size:14px;
+ transition:.3s;
+}
+
+.chat-body button:hover{
+ opacity:.9;
+}
+</style>
+
+<script>
+function toggleChat(){
+ document.getElementById("chatBox")
+ .classList.toggle("active");
+}
+
+function sendQuestion(type){
+
+ let response = "";
+
+ if(type === "horario"){
+     response = "Funcionamos de segunda a sexta das 08h às 18h.";
+ }
+
+ if(type === "consulta"){
+     response = "Os agendamentos podem ser feitos diretamente pelo WhatsApp.";
+ }
+
+ if(type === "convenio"){
+     response = "Aceitamos os principais convênios médicos.";
+ }
+
+ if(type === "endereco"){
+     response = "Estamos localizados no centro da cidade.";
+ }
+
+ const chat = document.getElementById("chatBody");
+
+ const message = document.createElement("div");
+
+ message.className = "bot-message";
+
+ message.innerHTML = `
+   ${response}
+   <br><br>
+   Caso precise de mais informações,
+   fale com nossa atendente 👇
+   <br><br>
+
+   <a href="https://wa.me/5511999999999?text=Olá!%20Preciso%20de%20ajuda."
+      target="_blank"
+      style="
+         background:#25D366;
+         color:#fff;
+         padding:10px 14px;
+         border-radius:8px;
+         text-decoration:none;
+         display:inline-block;
+      ">
+      Ir para WhatsApp
+   </a>
+ `;
+
+ chat.appendChild(message);
+
+ chat.scrollTop = chat.scrollHeight;
+}
+</script>
+
+  <script src="../page/clinica.js"></script>
+</body>
+</html>
