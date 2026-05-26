@@ -131,3 +131,22 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   btnClose.addEventListener('click', fechar);
   overlay.addEventListener('click', e => { if (e.target === overlay) fechar(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') fechar(); });
+
+/* ─── PRELOADER ─── */
+window.addEventListener("load", () => {
+
+  const preloader = document.getElementById("preloader");
+
+  setTimeout(() => {
+
+      preloader.classList.add("hide");
+
+      setTimeout(() => {
+
+          preloader.style.display = "none";
+
+      }, 700);
+
+  }, 2000);
+
+});
