@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FeinControl – Controle de Gastos</title>
+   <!--favicon-->
+   <link rel="icon" type="image/png" href="imgs/favi-icon.png">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-light">
+
+  <!-- ========== SIDEBAR ========== -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <span class="logo-icon">💰</span>
+      <span class="logo-text">FeinControl</span>
+    </div>
+
+    <!-- Perfil na sidebar -->
+    <div class="sidebar-profile" id="sidebarProfile">
+      <div class="profile-avatar" id="sidebarAvatar">👤</div>
+      <span class="profile-name" id="sidebarName">Usuário</span>
+    </div>
+
+    <ul class="sidebar-nav">
+      <li><a href__="#" class="nav-link active" data-page="dashboard">🏠 Dashboard</a></li>
+      <li><a href__="#" class="nav-link" data-page="transactions">💸 Transações</a></li>
+      <li><a href__="#" class="nav-link" data-page="goals">🎯 Metas</a></li>
+      <li><a href__="#" class="nav-link" data-page="recurring">🔄 Recorrentes</a></li>
+      <li><a href__="#" class="nav-link" data-page="reports">📊 Relatórios</a></li>
+      <li><a href__="#" class="nav-link" data-page="settings">⚙️ Configurações</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========== MOBILE TOP BAR ========== -->
+  <header class="mobile-header">
+    <button class="menu-btn" id="menuBtn">☰</button>
+    <span class="logo-text">FeinControl</span>
+    <button class="theme-btn-mobile" id="themeBtnMobile">🌙</button>
+  </header>
+
+  <!-- ========== MAIN CONTENT ========== -->
+  <main class="main-content">
+    <div class="overlay" id="overlay"></div>
+
+    <!-- ===== PAGE: DASHBOARD ===== -->
+    <section class="page active" id="page-dashboard">
+      <div class="page-header">
+        <div>
+          <h1 id="dashGreeting">Dashboard</h1>
+          <p class="subtitle">Visão geral das suas finanças</p>
+        </div>
+        <button class="btn btn-primary" id="btnNewDash">+ Nova Movimentação</button>
+      </div>
+
+      <!-- Cards de saldo -->
+      <div class="cards-grid">
+        <div class="card card-balance" id="cardBalance">
+          <div class="card-icon">💼</div>
+          <div class="card-info">
+            <span class="card-label">Saldo Atual</span>
+            <span class="card-value" id="totalBalance">R$ 0,00</span>
+          </div>
+        </div>
+        <div class="card card-income">
+          <div class="card-icon">📈</div>
+          <div class="card-info">
+            <span class="card-label">Receitas</span>
+            <span class="card-value income-value" id="totalIncome">R$ 0,00</span>
+          </div>
+        </div>
+        <div class="card card-expense">
+          <div class="card-icon">📉</div>
+          <div class="card-info">
+            <span class="card-label">Despesas</span>
+            <span class="card-value expense-value" id="totalExpense">R$ 0,00</span>
+          </div>
+        </div>
+        <div class="card card-compare">
+          <div class="card-icon" id="compareIcon">📊</div>
+          <div class="card-info">
+            <span class="card-label">vs. Mês Anterior</span>
+            <span class="card-value" id="compareValue">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alertas de vencimento -->
+      <div id="alertsBox" class="alerts-box" style="display:none"></div>
+
+      <!-- Top categoria -->
+      <div id="topCatBar" class="top-cat-bar" style="display:none"></div>
+
+      <div class="dashboard-grid">
+        <div class="box">
+          <div class="box-header">
+            <h3>Últimas 5 Transações</h3>
+            <a href__="#" class="link" data-page="transactions">Ver todas</a>
+          </div>
+          <div id="recentList" class="transaction-list"></div>
+        </div>
+        <div class="box">
+          <h3>Despesas por Categoria</h3>
+          <canvas id="dashPieChart" width="280" height="200"></canvas>
+          <div id="dashPieLegend" class="chart-legend"></div>
+        </div>
+      </div>
+
+      <div class="box" style="margin-top:20px">
+        <h3>Evolução Financeira (últimos 6 meses)</h3>
+        <canvas id="dashBarChart" width="700" height="240"></canvas>
+      </div>
+    </section>
+
+    <!-- ===== PAGE: TRANSAÇÕES ===== -->
+    <section class="page" id="page-transactions">
+      <div class="page-header">
+        <div>
+          <h1>Transações</h1>
+          <p class="subtitle" id="txSubtitle">0 movimentações</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn btn-outline" id="btnExportCSV">⬇ CSV</button>
+          <button class="btn btn-primary" id="btnNewTx">+ Nova</button>
+        </div>
+      </div>
+
+      <!-- Filtros avançados -->
+      <div class="filters-bar">
+        <div class="search-wrap">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Buscar descrição..." class="input" />
+        </div>
+        <input type="date" id="filterDateFrom" class="input" style="max-width:145px" title="Data inicial" />
+        <input type="date" id="filterDateTo" class="input" style="max-width:145px" title="Data final" />
+        <select id="filterMonth" class="input select">
+          <option value="">Todos os meses</option>
+          <option value="01">Janeiro</option><option value="02">Fevereiro</option>
+          <option value="03">Março</option><option value="04">Abril</option>
+          <option value="05">Maio</option><option value="06">Junho</option>
+          <option value="07">Julho</option><option value="08">Agosto</option>
+          <option value="09">Setembro</option><option value="10">Outubro</option>
+          <option value="11">Novembro</option><option value="12">Dezembro</option>
+        </select>
+        <select id="filterCategory" class="input select">
+          <option value="">Todas categorias</option>
+        </select>
+        <select id="filterType" class="input select">
+          <option value="">Todos tipos</option>
+          <option value="receita">Receita</option>
+          <option value="despesa">Despesa</option>
+        </select>
+      </div>
+
+      <div id="txList" class="transaction-list"></div>
+    </section>
+
+    <!-- ===== PAGE: METAS ===== -->
+    <section class="page" id="page-goals">
+      <div class="page-header">
+        <div>
+          <h1>Metas Financeiras</h1>
+          <p class="subtitle">Acompanhe seus objetivos</p>
+        </div>
+        <button class="btn btn-primary" id="btnNewGoal">+ Nova Meta</button>
+      </div>
+      <div id="goalsList" class="goals-grid"></div>
+    </section>
+
+    <!-- ===== PAGE: RECORRENTES ===== -->
+    <section class="page" id="page-recurring">
+      <div class="page-header">
+        <div>
+          <h1>Despesas Recorrentes</h1>
+          <p class="subtitle">Contas mensais e vencimentos</p>
+        </div>
+        <button class="btn btn-primary" id="btnNewRecurring">+ Nova Conta</button>
+      </div>
+      <div id="recurringList" class="transaction-list"></div>
+    </section>
+
+    <!-- ===== PAGE: RELATÓRIOS ===== -->
+    <section class="page" id="page-reports">
+      <div class="page-header">
+        <div>
+          <h1>Relatórios</h1>
+          <p class="subtitle">Análise detalhada das suas finanças</p>
+        </div>
+        <div class="header-actions">
+          <select id="reportPeriod" class="input select" style="width:140px">
+            <option value="monthly">Mensal</option>
+            <option value="weekly">Semanal</option>
+            <option value="annual">Anual</option>
+          </select>
+          <select id="reportMonth" class="input select" style="width:140px">
+            <option value="">Todos os meses</option>
+            <option value="01">Janeiro</option><option value="02">Fevereiro</option>
+            <option value="03">Março</option><option value="04">Abril</option>
+            <option value="05">Maio</option><option value="06">Junho</option>
+            <option value="07">Julho</option><option value="08">Agosto</option>
+            <option value="09">Setembro</option><option value="10">Outubro</option>
+            <option value="11">Novembro</option><option value="12">Dezembro</option>
+          </select>
+          <button class="btn btn-outline" id="btnExportPDF">📄 PDF</button>
+        </div>
+      </div>
+
+      <div class="cards-grid">
+        <div class="card card-income">
+          <div class="card-icon">📈</div>
+          <div class="card-info">
+            <span class="card-label">Receitas do período</span>
+            <span class="card-value income-value" id="rptIncome">R$ 0,00</span>
+          </div>
+        </div>
+        <div class="card card-expense">
+          <div class="card-icon">📉</div>
+          <div class="card-info">
+            <span class="card-label">Despesas do período</span>
+            <span class="card-value expense-value" id="rptExpense">R$ 0,00</span>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-icon">💰</div>
+          <div class="card-info">
+            <span class="card-label">Saldo do período</span>
+            <span class="card-value" id="rptBalance">R$ 0,00</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-grid">
+        <div class="box">
+          <h3>Receitas vs Despesas</h3>
+          <canvas id="rptBarChart" width="420" height="260"></canvas>
+        </div>
+        <div class="box">
+          <h3>Despesas por Categoria</h3>
+          <canvas id="rptPieChart" width="280" height="220"></canvas>
+          <div id="rptPieLegend" class="chart-legend"></div>
+        </div>
+      </div>
+
+      <div class="box" style="margin-top:20px" id="rptCatDetail">
+        <h3>Detalhamento por Categoria</h3>
+        <div id="rptCatTable"></div>
+      </div>
+    </section>
+
+    <!-- ===== PAGE: CONFIGURAÇÕES ===== -->
+    <section class="page" id="page-settings">
+      <div class="page-header">
+        <div>
+          <h1>Configurações</h1>
+          <p class="subtitle">Personalize seu aplicativo</p>
+        </div>
+      </div>
+
+      <div class="settings-grid">
+
+        <!-- Perfil -->
+        <div class="box">
+          <div class="box-header-icon">👤</div>
+          <h3>Foto de Perfil</h3>
+          <div class="profile-section">
+            <div class="profile-pic-wrap">
+              <div class="profile-pic-large" id="profilePicDisplay">👤</div>
+              <div class="profile-pic-actions">
+                <label class="btn btn-outline btn-sm" for="profilePicInput">📷 Alterar foto</label>
+                <input type="file" id="profilePicInput" accept="image/*" style="display:none" />
+                <button class="btn btn-outline btn-sm" id="btnRemovePhoto">🗑️ Remover</button>
+              </div>
+            </div>
+          </div>
+          <label class="label" style="margin-top:16px;display:block">Nome de exibição</label>
+          <div class="input-row">
+            <input type="text" id="settingsName" class="input" placeholder="Seu nome" />
+            <button class="btn btn-primary" id="btnSaveName">Salvar</button>
+          </div>
+        </div>
+
+        <!-- Categorias personalizadas -->
+        <div class="box">
+          <div class="box-header-icon">🏷️</div>
+          <h3>Categorias</h3>
+          <div id="catList" class="cat-list"></div>
+          <div class="input-row" style="margin-top:12px">
+            <input type="text" id="newCatIcon" class="input" placeholder="Ícone (emoji)" style="max-width:70px;text-align:center" />
+            <input type="text" id="newCatName" class="input" placeholder="Nome da categoria" />
+            <button class="btn btn-primary" id="btnAddCat">+</button>
+          </div>
+        </div>
+
+        <!-- Backup -->
+        <div class="box">
+          <div class="box-header-icon">💾</div>
+          <h3>Backup de Dados</h3>
+          <p class="toggle-sub" style="margin-bottom:14px">Exporte ou importe todos os seus dados.</p>
+          <div style="display:flex;gap:10px;flex-wrap:wrap">
+            <button class="btn btn-primary" id="btnExportJSON">⬇ Exportar JSON</button>
+            <label class="btn btn-outline" for="importFile">⬆ Importar JSON</label>
+            <input type="file" id="importFile" accept=".json" style="display:none" />
+          </div>
+        </div>
+
+        <!-- Aparência -->
+        <div class="box">
+          <div class="box-header-icon">🎨</div>
+          <h3>Aparência</h3>
+          <div class="toggle-row">
+            <div>
+              <p class="toggle-label">Tema Escuro</p>
+              <p class="toggle-sub">Ativar modo escuro</p>
+            </div>
+            <label class="toggle">
+              <input type="checkbox" id="darkToggle" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Perigo -->
+        <div class="box box-danger">
+          <div class="box-header-icon">🗑️</div>
+          <h3 style="color:var(--expense)">Zona de Perigo</h3>
+          <button class="btn btn-danger" id="btnClearAll">🗑️ Limpar Todos os Dados</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== MODAL: TRANSAÇÃO ========== -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modalTitle">Nova Movimentação</h2>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <form id="txForm" class="modal-form">
+        <input type="hidden" id="txId" />
+        <div class="form-group">
+          <label class="label">Descrição</label>
+          <input type="text" id="txDesc" class="input" placeholder="Ex: Almoço" required />
+        </div>
+        <div class="form-group">
+          <label class="label">Valor (R$)</label>
+          <input type="number" id="txAmount" class="input" placeholder="0,00" step="0.01" min="0.01" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="label">Tipo</label>
+            <select id="txType" class="input select">
+              <option value="despesa">Despesa</option>
+              <option value="receita">Receita</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="label">Categoria</label>
+            <select id="txCategory" class="input select"></select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="label">Data</label>
+          <input type="date" id="txDate" class="input" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" id="btnSaveTx">Adicionar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== MODAL: META ========== -->
+  <div class="modal-backdrop" id="goalModalBackdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="goalModalTitle">Nova Meta</h2>
+        <button class="modal-close" id="goalModalClose">✕</button>
+      </div>
+      <form id="goalForm" class="modal-form">
+        <input type="hidden" id="goalId" />
+        <div class="form-group">
+          <label class="label">Nome da meta</label>
+          <input type="text" id="goalName" class="input" placeholder="Ex: Reserva de emergência" required />
+        </div>
+        <div class="form-group">
+          <label class="label">Valor alvo (R$)</label>
+          <input type="number" id="goalTarget" class="input" step="0.01" min="1" required />
+        </div>
+        <div class="form-group">
+          <label class="label">Valor atual economizado (R$)</label>
+          <input type="number" id="goalCurrent" class="input" step="0.01" min="0" value="0" />
+        </div>
+        <div class="form-group">
+          <label class="label">Ícone (emoji)</label>
+          <input type="text" id="goalIcon" class="input" placeholder="🎯" style="max-width:80px" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Salvar Meta</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== MODAL: RECORRENTE ========== -->
+  <div class="modal-backdrop" id="recurModalBackdrop">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="recurModalTitle">Nova Despesa Recorrente</h2>
+        <button class="modal-close" id="recurModalClose">✕</button>
+      </div>
+      <form id="recurForm" class="modal-form">
+        <input type="hidden" id="recurId" />
+        <div class="form-group">
+          <label class="label">Descrição</label>
+          <input type="text" id="recurDesc" class="input" placeholder="Ex: Conta de luz" required />
+        </div>
+        <div class="form-group">
+          <label class="label">Valor (R$)</label>
+          <input type="number" id="recurAmount" class="input" step="0.01" min="0.01" required />
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="label">Categoria</label>
+            <select id="recurCategory" class="input select"></select>
+          </div>
+          <div class="form-group">
+            <label class="label">Dia de vencimento</label>
+            <input type="number" id="recurDay" class="input" min="1" max="31" placeholder="Ex: 10" required />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Salvar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ========== MODAL: CONFIRMAÇÃO ========== -->
+  <div class="modal-backdrop" id="confirmBackdrop">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2 id="confirmTitle">Confirmar</h2>
+        <button class="modal-close" id="confirmClose">✕</button>
+      </div>
+      <p id="confirmMsg" class="confirm-msg">Tem certeza?</p>
+      <div class="form-row">
+        <button class="btn btn-outline" id="confirmCancel">Cancelar</button>
+        <button class="btn btn-danger" id="confirmOk">Confirmar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="db.js"></script>
+  <script src="ui.js"></script>
+  <script src="charts.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
