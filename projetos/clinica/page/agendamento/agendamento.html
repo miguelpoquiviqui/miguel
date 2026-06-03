@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agendar Consulta | Viva Bem</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0b2323;
+      --bg2:       #0f2d2d;
+      --bg3:       #122f2f;
+      --surface:   rgba(255,255,255,0.04);
+      --border:    rgba(255,255,255,0.08);
+      --gold:      #c9a96e;
+      --gold-light:#e8c990;
+      --text:      #f0ece4;
+      --muted:     rgba(240,236,228,0.5);
+      --teal:      #2a7a7a;
+      --teal-light:#3a9494;
+      --danger:    #e07070;
+      --radius:    14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── BACKGROUND ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 10% 20%, rgba(42,122,122,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 90% 80%, rgba(201,169,110,0.08) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 72px;
+      background: rgba(11,35,35,0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--gold); font-size: 1.1rem; }
+
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--muted); font-size: 0.9rem; text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    .btn-nav {
+      background: transparent;
+      border: 1.5px solid var(--gold);
+      color: var(--gold);
+      padding: 9px 22px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .btn-nav:hover { background: var(--gold); color: var(--bg); }
+
+    /* ── MAIN ── */
+    main {
+      position: relative; z-index: 1;
+      padding: 110px 5% 80px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* ── HEADER ── */
+    .page-header {
+      text-align: center;
+      margin-bottom: 56px;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .page-header .tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.25);
+      color: var(--gold);
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 20px;
+    }
+
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+
+    .page-header h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+
+    .page-header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      max-width: 440px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* ── STEPS ── */
+    .steps {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0;
+      margin-bottom: 48px;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    .step {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 20px;
+      border-radius: 50px;
+      transition: all 0.3s;
+      cursor: default;
+    }
+
+    .step-num {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; font-weight: 500;
+      background: var(--surface);
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+
+    .step-label {
+      font-size: 0.82rem;
+      color: var(--muted);
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    .step.active .step-num {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+    }
+    .step.active .step-label { color: var(--text); }
+
+    .step.done .step-num {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: white;
+    }
+    .step.done .step-num::after { content: '✓'; font-size: 0.75rem; }
+    .step.done .step-num span { display: none; }
+
+    .step-divider {
+      width: 48px; height: 1px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 44px 48px;
+      backdrop-filter: blur(8px);
+      animation: fadeUp 0.6s ease 0.15s both;
+    }
+
+    /* ── STEP PANELS ── */
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    .step-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    .step-subtitle {
+      color: var(--muted);
+      font-size: 0.88rem;
+      margin-bottom: 32px;
+    }
+
+    /* ── MÉDICOS ── */
+    .doctors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .doctor-card {
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+      text-align: center;
+    }
+
+    .doctor-card:hover {
+      border-color: rgba(201,169,110,0.4);
+      background: rgba(201,169,110,0.04);
+      transform: translateY(-2px);
+    }
+
+    .doctor-card.selected {
+      border-color: var(--gold);
+      background: rgba(201,169,110,0.08);
+    }
+
+    .doctor-card.selected::after {
+      content: '✓';
+      position: absolute; top: 12px; right: 14px;
+      width: 22px; height: 22px;
+      background: var(--gold);
+      color: var(--bg);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .doctor-avatar {
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal), var(--bg3));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      margin: 0 auto 14px;
+      border: 2px solid var(--border);
+    }
+
+    .doctor-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .doctor-specialty {
+      font-size: 0.78rem;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .doctor-duration {
+      font-size: 0.75rem;
+      color: var(--muted);
+      display: flex; align-items: center; justify-content: center; gap: 4px;
+    }
+
+    /* ── CALENDÁRIO ── */
+    .calendar-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    @media (max-width: 680px) {
+      .calendar-wrap { grid-template-columns: 1fr; }
+    }
+
+    .calendar-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .cal-month {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+    }
+
+    .cal-nav {
+      background: none; border: 1px solid var(--border);
+      color: var(--muted); width: 32px; height: 32px;
+      border-radius: 8px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+    }
+    .cal-nav:hover { border-color: var(--gold); color: var(--gold); }
+
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+    }
+
+    .cal-day-name {
+      text-align: center;
+      font-size: 0.7rem;
+      color: var(--muted);
+      padding: 4px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.82rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+
+    .cal-day:hover:not(.disabled):not(.empty) {
+      border-color: rgba(201,169,110,0.4);
+      background: rgba(201,169,110,0.06);
+      color: var(--gold-light);
+    }
+
+    .cal-day.selected {
+      background: var(--gold);
+      color: var(--bg);
+      font-weight: 600;
+    }
+
+    .cal-day.today {
+      border-color: var(--teal);
+      color: var(--teal-light);
+    }
+
+    .cal-day.disabled {
+      color: rgba(240,236,228,0.15);
+      cursor: not-allowed;
+    }
+
+    .cal-day.empty { cursor: default; }
+
+    /* ── HORÁRIOS ── */
+    .slots-title {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 14px;
+    }
+
+    .slots-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+
+    .slot {
+      padding: 10px 6px;
+      text-align: center;
+      font-size: 0.82rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+      color: var(--muted);
+    }
+
+    .slot:hover:not(.occupied) {
+      border-color: rgba(201,169,110,0.5);
+      color: var(--gold-light);
+      background: rgba(201,169,110,0.05);
+    }
+
+    .slot.selected {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+      font-weight: 600;
+    }
+
+    .slot.occupied {
+      opacity: 0.3;
+      cursor: not-allowed;
+      text-decoration: line-through;
+    }
+
+    .no-date-msg {
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 32px 0;
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+    }
+
+    /* ── FORMULÁRIO ── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .card { padding: 28px 20px; }
+    }
+
+    .form-group {
+      display: flex; flex-direction: column; gap: 7px;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    input, select {
+      background: rgba(255,255,255,0.04);
+      border: 1.5px solid var(--border);
+      color: var(--text);
+      padding: 13px 16px;
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.92rem;
+      transition: border-color 0.2s;
+      outline: none;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    input:focus, select:focus {
+      border-color: rgba(201,169,110,0.6);
+    }
+
+    input::placeholder { color: rgba(240,236,228,0.25); }
+
+    select option { background: #0f2d2d; color: var(--text); }
+
+    .input-error {
+      border-color: var(--danger) !important;
+    }
+
+    .error-msg {
+      font-size: 0.75rem;
+      color: var(--danger);
+      margin-top: -4px;
+    }
+
+    /* ── RESUMO ── */
+    .summary-box {
+      background: rgba(201,169,110,0.06);
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+
+    .summary-title {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .summary-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.88rem;
+    }
+
+    .summary-row:last-child { border-bottom: none; }
+
+    .summary-row span:first-child { color: var(--muted); }
+    .summary-row span:last-child { font-weight: 500; }
+
+    .terms {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+
+    .terms input[type=checkbox] {
+      width: 16px; height: 16px;
+      flex-shrink: 0; margin-top: 2px;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    /* ── BOTÕES ── */
+    .btn-row {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-top: 32px;
+      gap: 12px;
+    }
+
+    .btn {
+      padding: 13px 32px;
+      border-radius: 50px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.25s;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--bg);
+      flex: 1;
+      max-width: 260px;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover { border-color: var(--text); color: var(--text); }
+
+    /* ── SUCESSO ── */
+    .success-panel {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .success-panel.active { display: block; }
+
+    .success-icon {
+      width: 80px; height: 80px;
+      background: rgba(42,122,122,0.15);
+      border: 2px solid var(--teal);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2rem;
+      margin: 0 auto 28px;
+    }
+
+    .success-panel h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 12px;
+    }
+
+    .success-panel p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      max-width: 380px;
+      margin: 0 auto 32px;
+    }
+
+    .success-detail {
+      background: rgba(42,122,122,0.08);
+      border: 1px solid rgba(42,122,122,0.2);
+      border-radius: var(--radius);
+      padding: 20px 28px;
+      display: inline-block;
+      text-align: left;
+      margin-bottom: 32px;
+      min-width: 280px;
+    }
+
+    .success-detail div {
+      font-size: 0.85rem;
+      padding: 5px 0;
+      color: var(--muted);
+    }
+
+    .success-detail strong { color: var(--text); }
+
+    /* ── ANIMAÇÕES ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative; z-index: 1;
+      text-align: center;
+      padding: 32px;
+      color: var(--muted);
+      font-size: 0.8rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="clinica.html" class="nav-logo">
+      <span>✦</span> Viva Bem
+    </a>
+    <ul class="nav-links">
+      <li><a href="clinica.html#sobre">Sobre</a></li>
+      <li><a href="clinica.html#servicos">Serviços</a></li>
+      <li><a href="clinica.html#depoimentos">Depoimentos</a></li>
+      <li><a href="clinica.html#contato">Contato</a></li>
+    </ul>
+    <button class="btn-nav" onclick="window.location.href='clinica.html'">← Voltar</button>
+  </nav>
+
+  <main>
+
+    <!-- HEADER -->
+    <div class="page-header">
+      <div class="tag">✦ Agendamento Online</div>
+      <h1>Agende sua <em>consulta</em></h1>
+      <p>Escolha o especialista, o dia e o horário ideal para você. Rápido, simples e sem espera.</p>
+    </div>
+
+    <!-- STEPS -->
+    <div class="steps" id="stepsBar">
+      <div class="step active" id="s1">
+        <div class="step-num"><span>1</span></div>
+        <div class="step-label">Especialista</div>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step" id="s2">
+        <div class="step-num"><span>2</span></div>
+        <div class="step-label">Data & Hora</div>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step" id="s3">
+        <div class="step-num"><span>3</span></div>
+        <div class="step-label">Seus dados</div>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step" id="s4">
+        <div class="step-num"><span>4</span></div>
+        <div class="step-label">Confirmar</div>
+      </div>
+    </div>
+
+    <!-- CARD -->
+    <div class="card" id="mainCard">
+
+      <!-- PANEL 1 — MÉDICO -->
+      <div class="step-panel active" id="panel1">
+        <h2 class="step-title">Escolha o especialista</h2>
+        <p class="step-subtitle">Selecione o profissional que melhor atende à sua necessidade</p>
+
+        <div class="doctors-grid" id="doctorsGrid">
+          <div class="doctor-card" data-id="1" data-name="Dra. Ana Lima" data-specialty="Dermatologia Estética" data-duration="45">
+            <div class="doctor-avatar">👩‍⚕️</div>
+            <div class="doctor-name">Dra. Ana Lima</div>
+            <div class="doctor-specialty">Dermatologia Estética</div>
+            <div class="doctor-duration">⏱ 45 min por consulta</div>
+          </div>
+          <div class="doctor-card" data-id="2" data-name="Dr. Rafael Costa" data-specialty="Nutrologia" data-duration="30">
+            <div class="doctor-avatar">👨‍⚕️</div>
+            <div class="doctor-name">Dr. Rafael Costa</div>
+            <div class="doctor-specialty">Nutrologia</div>
+            <div class="doctor-duration">⏱ 30 min por consulta</div>
+          </div>
+          <div class="doctor-card" data-id="3" data-name="Dra. Camila Torres" data-specialty="Medicina Integrativa" data-duration="60">
+            <div class="doctor-avatar">👩‍⚕️</div>
+            <div class="doctor-name">Dra. Camila Torres</div>
+            <div class="doctor-specialty">Medicina Integrativa</div>
+            <div class="doctor-duration">⏱ 60 min por consulta</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <div></div>
+          <button class="btn btn-primary" id="btn1" disabled onclick="goTo(2)">Continuar →</button>
+        </div>
+      </div>
+
+      <!-- PANEL 2 — DATA & HORA -->
+      <div class="step-panel" id="panel2">
+        <h2 class="step-title">Escolha a data e horário</h2>
+        <p class="step-subtitle" id="panel2sub">Selecione um dia disponível no calendário</p>
+
+        <div class="calendar-wrap">
+          <!-- CALENDÁRIO -->
+          <div>
+            <div class="calendar-header">
+              <button class="cal-nav" onclick="prevMonth()">‹</button>
+              <span class="cal-month" id="calMonthLabel"></span>
+              <button class="cal-nav" onclick="nextMonth()">›</button>
+            </div>
+            <div class="cal-grid" id="calGrid"></div>
+          </div>
+
+          <!-- HORÁRIOS -->
+          <div>
+            <div class="slots-title">Horários disponíveis</div>
+            <div id="slotsWrap">
+              <div class="no-date-msg">Selecione uma data para ver os horários</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="goTo(1)">← Voltar</button>
+          <button class="btn btn-primary" id="btn2" disabled onclick="goTo(3)">Continuar →</button>
+        </div>
+      </div>
+
+      <!-- PANEL 3 — DADOS DO PACIENTE -->
+      <div class="step-panel" id="panel3">
+        <h2 class="step-title">Seus dados</h2>
+        <p class="step-subtitle">Preencha para confirmarmos sua consulta e enviar o lembrete</p>
+
+        <div class="form-grid">
+          <div class="form-group full">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" placeholder="Seu nome completo" />
+            <span class="error-msg" id="err-nome"></span>
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" placeholder="seu@email.com" />
+            <span class="error-msg" id="err-email"></span>
+          </div>
+          <div class="form-group">
+            <label for="telefone">Telefone / WhatsApp</label>
+            <input type="tel" id="telefone" placeholder="(00) 00000-0000" />
+            <span class="error-msg" id="err-telefone"></span>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="goTo(2)">← Voltar</button>
+          <button class="btn btn-primary" onclick="goTo(4)">Revisar →</button>
+        </div>
+      </div>
+
+      <!-- PANEL 4 — CONFIRMAR -->
+      <div class="step-panel" id="panel4">
+        <h2 class="step-title">Confirme seu agendamento</h2>
+        <p class="step-subtitle">Revise os detalhes antes de finalizar</p>
+
+        <div class="summary-box">
+          <div class="summary-title">✦ Resumo da consulta</div>
+          <div class="summary-row"><span>Especialista</span><span id="sum-doctor">—</span></div>
+          <div class="summary-row"><span>Especialidade</span><span id="sum-specialty">—</span></div>
+          <div class="summary-row"><span>Data</span><span id="sum-date">—</span></div>
+          <div class="summary-row"><span>Horário</span><span id="sum-time">—</span></div>
+          <div class="summary-row"><span>Duração</span><span id="sum-duration">—</span></div>
+          <div class="summary-row"><span>Paciente</span><span id="sum-name">—</span></div>
+          <div class="summary-row"><span>E-mail</span><span id="sum-email">—</span></div>
+          <div class="summary-row"><span>Telefone</span><span id="sum-phone">—</span></div>
+        </div>
+
+        <div class="terms">
+          <input type="checkbox" id="terms" onchange="toggleConfirm()" />
+          <label for="terms" style="text-transform:none;letter-spacing:0;font-size:0.82rem;cursor:pointer;">
+            Confirmo que os dados estão corretos e concordo em receber um lembrete por e-mail 24h antes da consulta.
+          </label>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-ghost" onclick="goTo(3)">← Voltar</button>
+          <button class="btn btn-primary" id="btnConfirm" disabled onclick="confirmar()">Confirmar agendamento ✓</button>
+        </div>
+      </div>
+
+    </div><!-- /card -->
+
+    <!-- SUCESSO -->
+    <div class="success-panel" id="successPanel">
+      <div class="success-icon">✓</div>
+      <h2>Consulta agendada!</h2>
+      <p>Enviamos um e-mail de confirmação para <strong id="suc-email"></strong>. Você receberá um lembrete 24h antes da consulta.</p>
+      <div class="success-detail">
+        <div><strong id="suc-doctor"></strong></div>
+        <div id="suc-date"></div>
+        <div id="suc-time"></div>
+      </div>
+      <button class="btn btn-primary" style="max-width:220px;margin:0 auto;" onclick="window.location.href='clinica.html'">← Voltar ao início</button>
+    </div>
+
+  </main>
+
+  <footer>
+    <p>© 2025 Clínica Viva Bem · <a href="#">Política de Privacidade</a> · Todos os direitos reservados</p>
+  </footer>
+
+<script>
+  // ── STATE ──
+  const state = {
+    doctor: null,
+    date: null,
+    time: null,
+    name: '',
+    email: '',
+    phone: ''
+  };
+
+  let calYear, calMonth;
+  const today = new Date();
+
+  // Horários simulados ocupados (para demonstração)
+  // No backend, isso virá do banco de dados
+  const occupied = {
+    '2025-06-10': ['09:00','10:30'],
+    '2025-06-11': ['08:00','09:45','14:00'],
+  };
+
+  // ── PASSO ──
+  function goTo(step) {
+    if (step === 3 && !validateForm2()) return;
+    if (step === 4 && !validateForm3()) return;
+
+    [1,2,3,4].forEach(i => {
+      document.getElementById(`panel${i}`).classList.toggle('active', i === step);
+      const s = document.getElementById(`s${i}`);
+      s.classList.remove('active','done');
+      if (i < step) s.classList.add('done');
+      if (i === step) s.classList.add('active');
+    });
+
+    if (step === 4) fillSummary();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── MÉDICO ──
+  document.querySelectorAll('.doctor-card').forEach(card => {
+    card.addEventListener('click', () => {
+      document.querySelectorAll('.doctor-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+      state.doctor = {
+        id: card.dataset.id,
+        name: card.dataset.name,
+        specialty: card.dataset.specialty,
+        duration: parseInt(card.dataset.duration)
+      };
+      document.getElementById('btn1').disabled = false;
+      document.getElementById('panel2sub').textContent =
+        `Disponibilidade de ${state.doctor.name} — consultas de ${state.doctor.duration} min`;
+    });
+  });
+
+  // ── CALENDÁRIO ──
+  const months = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho',
+                  'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const days   = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+
+  function initCal() {
+    calYear  = today.getFullYear();
+    calMonth = today.getMonth();
+    renderCal();
+  }
+
+  function renderCal() {
+    document.getElementById('calMonthLabel').textContent = `${months[calMonth]} ${calYear}`;
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+
+    days.forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'cal-day-name'; el.textContent = d;
+      grid.appendChild(el);
+    });
+
+    const first = new Date(calYear, calMonth, 1).getDay();
+    const total = new Date(calYear, calMonth + 1, 0).getDate();
+
+    for (let i = 0; i < first; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day empty';
+      grid.appendChild(el);
+    }
+
+    for (let d = 1; d <= total; d++) {
+      const el   = document.createElement('div');
+      const date = new Date(calYear, calMonth, d);
+      const dow  = date.getDay();
+      const isPast = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
+      const isSun  = dow === 0;
+
+      el.className = 'cal-day';
+      el.textContent = d;
+
+      if (isPast || isSun) {
+        el.classList.add('disabled');
+      } else {
+        const dateStr = formatDate(calYear, calMonth + 1, d);
+        if (state.date === dateStr) el.classList.add('selected');
+
+        const isToday =
+          d === today.getDate() &&
+          calMonth === today.getMonth() &&
+          calYear === today.getFullYear();
+        if (isToday) el.classList.add('today');
+
+        el.addEventListener('click', () => selectDate(calYear, calMonth + 1, d));
+      }
+
+      grid.appendChild(el);
+    }
+  }
+
+  function prevMonth() {
+    const now = new Date();
+    if (calYear === now.getFullYear() && calMonth === now.getMonth()) return;
+    calMonth--;
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCal();
+  }
+
+  function nextMonth() {
+    calMonth++;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    renderCal();
+  }
+
+  function formatDate(y, m, d) {
+    return `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+  }
+
+  function selectDate(y, m, d) {
+    state.date = formatDate(y, m, d);
+    state.time = null;
+    document.getElementById('btn2').disabled = true;
+    renderCal();
+    renderSlots();
+  }
+
+  // ── HORÁRIOS ──
+  function renderSlots() {
+    const wrap = document.getElementById('slotsWrap');
+    if (!state.doctor || !state.date) {
+      wrap.innerHTML = '<div class="no-date-msg">Selecione uma data para ver os horários</div>';
+      return;
+    }
+
+    // Gera slots baseados na duração do médico (08:00 - 18:00)
+    const dur = state.doctor.duration;
+    const slots = [];
+    let h = 8, m = 0;
+    while (h < 18) {
+      slots.push(`${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}`);
+      m += dur;
+      if (m >= 60) { h += Math.floor(m / 60); m = m % 60; }
+    }
+
+    const occ = occupied[state.date] || [];
+
+    let html = '<div class="slots-grid">';
+    slots.forEach(slot => {
+      const isOcc = occ.includes(slot);
+      const isSel = state.time === slot;
+      html += `<div class="slot${isOcc ? ' occupied' : ''}${isSel ? ' selected' : ''}"
+        ${isOcc ? '' : `onclick="selectSlot('${slot}')"`}>${slot}</div>`;
+    });
+    html += '</div>';
+    wrap.innerHTML = html;
+  }
+
+  function selectSlot(time) {
+    state.time = time;
+    document.getElementById('btn2').disabled = false;
+    renderSlots();
+  }
+
+  // ── VALIDAÇÃO ──
+  function validateForm2() { return !!(state.date && state.time); }
+
+  function validateForm3() {
+    let ok = true;
+    const nome  = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const tel   = document.getElementById('telefone').value.trim();
+
+    document.getElementById('err-nome').textContent  = '';
+    document.getElementById('err-email').textContent = '';
+    document.getElementById('err-telefone').textContent = '';
+    document.getElementById('nome').classList.remove('input-error');
+    document.getElementById('email').classList.remove('input-error');
+    document.getElementById('telefone').classList.remove('input-error');
+
+    if (!nome || nome.split(' ').length < 2) {
+      document.getElementById('err-nome').textContent = 'Informe o nome completo';
+      document.getElementById('nome').classList.add('input-error');
+      ok = false;
+    }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      document.getElementById('err-email').textContent = 'E-mail inválido';
+      document.getElementById('email').classList.add('input-error');
+      ok = false;
+    }
+    if (!tel || tel.replace(/\D/g,'').length < 10) {
+      document.getElementById('err-telefone').textContent = 'Telefone inválido';
+      document.getElementById('telefone').classList.add('input-error');
+      ok = false;
+    }
+
+    if (ok) {
+      state.name  = nome;
+      state.email = email;
+      state.phone = tel;
+    }
+    return ok;
+  }
+
+  // ── TELEFONE MASK ──
+  document.getElementById('telefone').addEventListener('input', function () {
+    let v = this.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length > 6) v = `(${v.slice(0,2)}) ${v.slice(2,7)}-${v.slice(7)}`;
+    else if (v.length > 2) v = `(${v.slice(0,2)}) ${v.slice(2)}`;
+    else if (v.length > 0) v = `(${v}`;
+    this.value = v;
+  });
+
+  // ── RESUMO ──
+  const ptDate = d => {
+    const [y,m,day] = d.split('-');
+    const names = ['','Janeiro','Fevereiro','Março','Abril','Maio','Junho',
+                   'Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+    return `${parseInt(day)} de ${names[parseInt(m)]} de ${y}`;
+  };
+
+  function fillSummary() {
+    document.getElementById('sum-doctor').textContent   = state.doctor.name;
+    document.getElementById('sum-specialty').textContent= state.doctor.specialty;
+    document.getElementById('sum-date').textContent     = ptDate(state.date);
+    document.getElementById('sum-time').textContent     = state.time;
+    document.getElementById('sum-duration').textContent = `${state.doctor.duration} minutos`;
+    document.getElementById('sum-name').textContent     = state.name;
+    document.getElementById('sum-email').textContent    = state.email;
+    document.getElementById('sum-phone').textContent    = state.phone;
+  }
+
+  function toggleConfirm() {
+    document.getElementById('btnConfirm').disabled = !document.getElementById('terms').checked;
+  }
+
+  // ── CONFIRMAR ──
+  function confirmar() {
+    // Aqui vai a chamada ao backend PHP (POST /api/agendamento)
+    // Por enquanto, mostra o painel de sucesso
+    document.getElementById('mainCard').style.display  = 'none';
+    document.getElementById('stepsBar').style.display  = 'none';
+    document.querySelector('.page-header').style.display = 'none';
+
+    document.getElementById('suc-email').textContent  = state.email;
+    document.getElementById('suc-doctor').textContent = `${state.doctor.name} — ${state.doctor.specialty}`;
+    document.getElementById('suc-date').textContent   = ptDate(state.date);
+    document.getElementById('suc-time').textContent   = `às ${state.time} (${state.doctor.duration} min)`;
+
+    document.getElementById('successPanel').classList.add('active');
+  }
+
+  // ── INIT ──
+  initCal();
+</script>
+</body>
+</html>
