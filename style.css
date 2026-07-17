@@ -130,8 +130,8 @@
 /* ── imagem (aparece primeiro, some no hover) ── */
 .project-img-wrap { position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1); z-index: 1; }
 .project-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.6); transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1); }
-.project-img-wrap-ia {position: absolute; inset: 0; width: 100%; height: 100%; overflow: hidden; transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1); z-index: 1; }
-.project-img-wrap-ia img {width: 100%; height: 50%; object-fit: cover; display: block; filter: brightness(0.6); transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);}
+.project-img-wrap-ia {position: absolute; inset: 0; width: 100%; height: 150%; overflow: hidden; transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1); z-index: 1; }
+.project-img-wrap-ia img {width: 100%; height: 150%; object-fit: cover; display: block; filter: brightness(0.6); transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);}
 .project-card:hover .project-img-wrap { transform: rotate(-45deg) scale(0); opacity: 0; }
 /* ── overlay (começa escondido, aparece no hover) ── */
 .project-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-45deg); width: 100%; height: 100%; padding: 28px 24px; box-sizing: border-box; background: linear-gradient(135deg, #0d0d0d 0%, #1a0a2e 100%); border-top: 2px solid rgba(187, 111, 255, 0.5); opacity: 0; z-index: 2; display: flex; flex-direction: column; justify-content: flex-end; transition: all 0.6s cubic-bezier(0.23, 1, 0.320, 1);}
