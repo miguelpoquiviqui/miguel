@@ -1,48 +1,86 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Miguel | Portfólio</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css" />
-
-  <!--favicon-->
-  <link id="favicon" rel="icon" type="image/png" href="imgs/letter-m.png">
-
-  <!--titulo do navegador quando o cliente sair do site-->
-  <script>
-    function trocarFavicon(src) {
-  const favicon = document.getElementById("favicon");
-  favicon.href = src + "?v=" + Date.now();
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Miguel | Portfólio</title>
+      <meta name="description" content="Portfólio de Miguel Poquiviqui, desenvolvedor web Full Stack. Conheça meus projetos, tecnologias e experiências em desenvolvimento Front-end e Back-end.">
+      <meta name="robots" content="index, follow">
+      <meta name="author" content="Miguel Poquiviqui">
+      <link rel="canonical" href="https://miguelpoquiviqui.github.io/miguel/">
+      <meta property="og:type" content="website">
+      <meta property="og:locale" content="pt_BR">
+      <meta property="og:site_name" content="Miguel Poquiviqui | Portfólio">
+      <meta property="og:title" content="Miguel Poquiviqui | Desenvolvedor Web Full Stack">
+      <meta property="og:description" content="Conheça o portfólio de Miguel Poquiviqui, seus projetos, tecnologias e experiências em desenvolvimento web.">
+      <meta property="og:url" content="https://miguelpoquiviqui.github.io/miguel/">
+      <meta property="og:image" content="https://miguelpoquiviqui.github.io/miguel/imgs/eu3.jpg">
+      <meta property="og:image:alt" content="Miguel Poquiviqui | Desenvolvedor Web">
+      <meta name="twitter:card" content="summary_large_image">
+      <meta name="twitter:title" content="Miguel Poquiviqui | Desenvolvedor Web Full Stack">
+      <meta name="twitter:description" content="Conheça o portfólio de Miguel Poquiviqui, seus projetos, tecnologias e experiências em desenvolvimento web.">
+      <meta name="twitter:image" content="https://miguelpoquiviqui.github.io/miguel/imgs/eu3.jpg">
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+      <link rel="stylesheet" href="https://unpkg.com/kursor/dist/kursor.css">
+      <!-- Favicon -->
+      <link id="favicon" rel="icon" type="image/png" href="imgs/letter-m.png">
+  
+      <!-- Título do navegador quando o usuário sair do site -->
+      <script>
+          function trocarFavicon(src) {
+              const favicon = document.getElementById("favicon");
+              favicon.href = src + "?v=" + Date.now();
+          }
+  
+          const tituloOriginal = document.title;
+          let intervalo;
+  
+          document.addEventListener("visibilitychange", () => {
+              if (document.hidden) {
+                  document.title = "Volte aqui...";
+  
+                  let alerta = false;
+  
+                  intervalo = setInterval(() => {
+                      trocarFavicon(
+                          alerta
+                              ? "imgs/favicon-alerta-grande.png"
+                              : "imgs/favicon-alerta-pequeno.png"
+                      );
+  
+                      alerta = !alerta;
+                  }, 1000);
+  
+              } else {
+                  clearInterval(intervalo);
+                  trocarFavicon("imgs/letter-m.png");
+                  document.title = tituloOriginal;
+              }
+          });
+      </script>
+  
+      <!-- CSS -->
+      <link rel="stylesheet" href="style.css">
+      ```html
+<!-- Dados estruturados -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Miguel Poquiviqui",
+    "url": "https://miguelpoquiviqui.github.io/miguel/",
+    "jobTitle": "Desenvolvedor Web Full Stack",
+    "sameAs": [
+        "https://github.com/miguelpoquiviqui",
+        "https://www.linkedin.com/in/dev-miguel-9553bb368/",
+        "https://www.instagram.com/miguelpoquiviqui_"
+    ]
 }
-const tituloOriginal = document.title;
-let intervalo;
-document.addEventListener("visibilitychange", () => {
-  if (document.hidden) {
-      document.title = "Volte aqui...";
-      let alerta = false;
-      intervalo = setInterval(() => {
-          trocarFavicon(
-              alerta
-                  ? "imgs/favicon-alerta-grande.png"
-                  : "imgs/favicon-alerta-pequeno.png"
-          );
-          alerta = !alerta
-      }, 1000);
-  } else {
-      clearInterval(intervalo);
-      trocarFavicon("imgs/letter-m.png");
-      document.title = tituloOriginal;
-  }
-});
-  </script>
+</script>
+  </head>
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css">
-</head>
 <body>
 
 <!-- PRELOADER -->
@@ -85,9 +123,7 @@ document.addEventListener("visibilitychange", () => {
         Olá, meu nome é<span class="ctt-titulo-2"> Miguel</span>,<br>
         Seja bem vindo ao meu portfólio
       </h1>
-      <p class="comeco-sub">
-        Sou desenvolvedor web com 2 anos de muito estudo, transformando ideias em sites e sistemas reais — com código limpo, atenção aos detalhes e muita vontade de aprender.
-      </p>
+      <p class="comeco-sub">Sou desenvolvedor web com 2 anos de muito estudo, transformando ideias em sites e sistemas reais, com código limpo, atenção aos detalhes e muita vontade de aprender.</p>
       <div class="comeco-actions">
         <!-- BOTÃO --> 
         <a class="cssbuttons-io" href="https://wa.me/5531982579306" target="_blank">
@@ -111,7 +147,7 @@ document.addEventListener("visibilitychange", () => {
     <div class="envolta-foto">
       <div class="anel-foto">
         <div class="img-principal">
-          <img src="imgs\eu3.jpg" alt="Miguel" />
+          <img src="imgs/eu2.jpg" alt="Miguel" />
         </div>
         <div class="card-foto">
           <div class="titulo-foto">// Status</div>
@@ -138,7 +174,7 @@ document.addEventListener("visibilitychange", () => {
         <div class="about-text">
           <div class="badge-pill"><span class="badge-dot"></span> Sobre mim</div>
           <h2 class="section-title">Quem é o <span class="highlight">Dev. Miguel?</span></h2>
-          <p class="ex-desc">Tenho 17 anos e comecei a programar por curiosidade — queria entender como as coisas funcionavam por trás da tela. Dois anos depois, já construo sites e sistemas do zero e estou em busca do meu primeiro estágio para crescer ainda mais. Sou dedicado, aprendo rápido e levo cada projeto a sério, por menor que seja.</p>
+          <p class="ex-desc">Tenho 17 anos e comecei a programar por curiosidade, queria entender como as coisas funcionavam por trás da tela. Dois anos depois, já construo sites e sistemas do zero e estou em busca do meu primeiro estágio para crescer ainda mais. Sou dedicado, aprendo rápido e levo cada projeto a sério, por menor que seja.</p>
           <div class="skills-cards">
             <span class="skill-card"><span class="skill-card-ativo"></span>Html/Css</span>
             <span class="skill-card"><span class="skill-card-ativo"></span>JavaScript</span>
@@ -151,9 +187,9 @@ document.addEventListener("visibilitychange", () => {
             <span class="skill-card"><span class="skill-card-ativo"></span>WooCommerce</span>
             <span class="skill-card"><span class="skill-card-ativo"></span>REST APIs</span>
             <span class="skill-card"><span class="skill-card-ativo"></span>Programação Mobile</span>
-            <span class="skill-card"><span class="skill-card-ativo"></span>Php</span>
-            <span class="skill-card"><span class="skill-card-ativo"></span>Java</span>
-            <span class="skill-card"><span class="skill-card-ativo"></span>Phython</span>
+            <span class="skill-card"><span class="skill-card-ativo"></span>Gsap</span>
+            <span class="skill-card"><span class="skill-card-ativo"></span>Docker</span>
+            <span class="skill-card"><span class="skill-card-ativo"></span>Api Rest</span>
             <span class="skill-card"><span class="skill-card-ativo"></span>Git/GitHub</span>
           </div>
           <!-- BOTÂO --> 
@@ -176,16 +212,16 @@ document.addEventListener("visibilitychange", () => {
     <div class="container">
       <div class="badge-pill center"><span class="badge-dot"></span> Portfólio</div>
       <h2 class="section-title center">Projetos em <span class="highlight">Destaque</span></h2>
-      <p class="section-sub center">Uma seleção dos trabalhos que mais me orgulho — cada um com um desafio diferente e uma solução pensada do zero.</p>
+      <p class="section-sub center">Uma seleção dos trabalhos que mais me orgulho, cada um com um desafio diferente e uma solução pensada do zero.</p>
       <div class="projects-grid">
 
         <div class="project-card">
-          <div class=".project-img-wrap"><img src="https://images.unsplash.com/photo-1651876360196-a8c378bfca7f?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Dashboard" loading="lazy" /></div>
+          <div class="project-img-wrap"><img src="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80" alt="Dashboard" loading="lazy" /></div>
           <div class="project-overlay">
             <span class="project-tag">Front-end</span>
-            <h4>Landing Page Futurista</h4>
-            <p>Animações avançadas com GSAP e elementos 3D para uma experiência visual imersiva.</p>
-            <a href="https://miguelpoquiviqui.github.io/Distorting/" class="btn-outline-sm" target="_blank">Ver projeto →</a>
+            <h4>Dashboard administrativo</h4>
+            <p>Painel de gestão com gráficos em tempo real e controle de acesso.</p>
+            <a href="#contact" class="btn-outline-sm" target="_blank">Ver projeto →</a>
           </div>
         </div>
 
@@ -267,21 +303,21 @@ document.addEventListener("visibilitychange", () => {
     <p class="section-sub center">Formação contínua e atualizada nas tecnologias que uso no dia a dia dos meus projetos.</p>
 
     <div class="certs-grid">
-      <!-- CARD 1 — troque "imgs/cert-6.jpg" pela foto do seu certificado -->
+      <!-- CARD 1 -->
       <div class="cert-card" data-cert="imgs/cert-6.jpg">
         <div class="cert-icon-wrap">
-          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <img src="imgs/descomplica.png" width="24" height="24" alt="ícone">
         </div>
         <div class="cert-issuer">Universidades</div>
         <div class="cert-title">Ciências da Computação</div>
-        <div class="cert-desc">Descrição breve do que foi aprendido neste curso. Substitua pelo conteúdo real do seu certificado.</div>
+        <div class="cert-desc">Formação voltada aos fundamentos da computação e ao desenvolvimento de soluções tecnológicas, abordando programação, algoritmos, estruturas de dados, bancos de dados, engenharia de software e outras áreas da computação.</div>
         <div class="cert-meta">
           <span class="cert-date">2027</span>
           <span class="cert-badge-red">X Não Íniciado</span>
         </div>
       </div>
 
-      <!-- CARD 2 — troque "imgs/cert-proz.jpg" pela foto do seu certificado -->
+      <!-- CARD 2 -->
       <div class="cert-card" data-cert="imgs/certif.jpg">
         
         <div class="cert-icon-wrap">
@@ -296,7 +332,7 @@ document.addEventListener("visibilitychange", () => {
         </div>
       </div>
 
-      <!-- CARD 3 — troque "imgs/cert-curso-video.jpg" pela foto do seu certificado -->
+      <!-- CARD 3 -->
       <div class="cert-card" data-cert="imgs/cert-curso-video.jpg">
         <div class="cert-icon-wrap">
           <img src="imgs/curso-em-video.png" width="24" height="24" alt="ícone">
@@ -310,10 +346,10 @@ document.addEventListener("visibilitychange", () => {
         </div>
       </div>
 
-      <!-- CARD 4 — troque "imgs/cert-git.jpg" pela foto do seu certificado -->
+      <!-- CARD 4 -->
       <div class="cert-card" data-cert="imgs/cert-git.jpg">
         <div class="cert-icon-wrap">
-          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <img src="imgs/git.jpg" width="24" height="24" alt="ícone">
         </div>
         <div class="cert-issuer">Tiago Matos</div>
         <div class="cert-title">Git / GitHub</div>
@@ -324,33 +360,76 @@ document.addEventListener("visibilitychange", () => {
         </div>
       </div>
 
-      <!-- CARD 5 — troque "imgs/cert-4.jpg" pela foto do seu certificado -->
+      <!-- CARD 5 -->
       <div class="cert-card" data-cert="imgs/cert-4.jpg">
         <div class="cert-icon-wrap">
-          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <img src="imgs/js.png" width="24" height="24" alt="ícone">
         </div>
-        <div class="cert-issuer">Nome da Instituição</div>
-        <div class="cert-title">Nome do Certificado / Curso</div>
-        <div class="cert-desc">Descrição breve do que foi aprendido neste curso. Substitua pelo conteúdo real do seu certificado.</div>
+        <div class="cert-issuer">Matheus Battisti - Hora de Codar</div>
+        <div class="cert-title">Curso de JavaScript</div>
+        <div class="cert-desc">Curso focado no desenvolvimento com JavaScript, explorando os principais fundamentos da linguagem e sua aplicação prática na criação de interfaces e funcionalidades interativas para a web.</div>
         <div class="cert-meta">
-          <span class="cert-date">Mês / Ano</span>
+          <span class="cert-date">06 / 2026</span>
           <span class="cert-badge">✓ Concluído</span>
         </div>
       </div>
 
-      <!-- CARD 6 — troque "imgs/cert-5.jpg" pela foto do seu certificado -->
+      <!-- CARD 6 -->
       <div class="cert-card" data-cert="imgs/cert-5.jpg">
         <div class="cert-icon-wrap">
-          <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <img src="imgs/codecamp.jpg" width="24" height="24" alt="ícone">
         </div>
-        <div class="cert-issuer">Nome da Instituição</div>
-        <div class="cert-title">Nome do Certificado / Curso</div>
-        <div class="cert-desc">Descrição breve do que foi aprendido neste curso. Substitua pelo conteúdo real do seu certificado.</div>
+        <div class="cert-issuer">Freecodecamp</div>
+        <div class="cert-title">Certificação JavaScript</div>
+        <div class="cert-desc">Curso voltado ao desenvolvimento web com JavaScript, abordando desde os fundamentos da linguagem até conceitos práticos para criação de aplicações e páginas web interativas.</div>
         <div class="cert-meta">
-          <span class="cert-date">Mês / Ano</span>
+          <span class="cert-date">08 / 2026</span>
           <span class="cert-badge">✓ Concluído</span>
         </div>
       </div>
+
+      <!-- CARD 7 -->
+      <div class="cert-card" data-cert="imgs/cert-5.jpg">
+        <div class="cert-icon-wrap">
+          <img src="imgs/node.jpg" width="24" height="24" alt="ícone">
+        </div>
+        <div class="cert-issuer">Victor Lima - Ciência da Computação</div>
+        <div class="cert-title">Node.Js </div>
+        <div class="cert-desc">Curso voltado ao desenvolvimento de aplicações no back-end com Node.js, abordando os fundamentos da plataforma, criação de servidores, APIs e integração com diferentes recursos e serviços.</div>
+        <div class="cert-meta">
+          <span class="cert-date">08 / 2026</span>
+          <span class="cert-badge-red">X Não Íniciado</span>
+        </div>
+      </div>
+
+      <!-- CARD 8 -->
+      <div class="cert-card" data-cert="imgs/cert-5.jpg">
+        <div class="cert-icon-wrap">
+          <img src="imgs/react.jpg" width="24" height="24" alt="ícone">
+        </div>
+        <div class="cert-issuer">Matheus Battisti - Hora de Codar</div>
+        <div class="cert-title">React</div>
+        <div class="cert-desc">Curso voltado ao desenvolvimento de interfaces modernas e interativas com React, abordando componentes, gerenciamento de estado, integração com APIs e boas práticas no desenvolvimento front-end.</div>
+        <div class="cert-meta">
+          <span class="cert-date">08 / 2026</span>
+          <span class="cert-badge-red">X Não Íniciado</span>
+        </div>
+      </div>
+
+      <!-- CARD 9 -->
+      <div class="cert-card" data-cert="imgs/cert-5.jpg">
+        <div class="cert-icon-wrap">
+          <img src="imgs/bd.jpg" width="24" height="24" alt="ícone">
+        </div>
+        <div class="cert-issuer">Otávio Miranda</div>
+        <div class="cert-title">Curso de SQL com MySQL</div>
+        <div class="cert-desc">Curso voltado ao gerenciamento e manipulação de bancos de dados relacionais, abordando a linguagem SQL e sua aplicação prática com MySQL para criação, consulta e organização de dados.</div>
+        <div class="cert-meta">
+          <span class="cert-date">08 / 2026</span>
+          <span class="cert-badge-red">X Não Íniciado</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -418,15 +497,15 @@ document.addEventListener("visibilitychange", () => {
 <footer class="footer">
     <div class="container footer-inner">
       <div class="footer-logo">
-        <a href="https://www.instagram.com/agencia_mps/" target="_blank" rel="noopener">
-          <img src="imgs\mps_web_logo.png" alt="MPS Web">
+        <a href="https://www.instagram.com/mps_web/" target="_blank" rel="noopener">
+          <img src="imgs/mps-logo.png" alt="MPS Web">
         </a>
       
         <div class="footer-text">
-          <span class="footer-small">conheça a minha agência</span>
+          <span class="footer-small">Transformamos ideias em presença digital.</span>
           
-          <a href="https://www.instagram.com/agencia_mps/" target="_blank" rel="noopener" class="footer-name">
-            @mpsweb
+          <a href="https://www.instagram.com/mps_web/" target="_blank" rel="noopener" class="footer-name">
+            @mps_web
           </a>
         </div>
       </div>
@@ -451,6 +530,5 @@ document.addEventListener("visibilitychange", () => {
 
 <script src="script.js"></script>
 
-</script>
 </body>
 </html>
