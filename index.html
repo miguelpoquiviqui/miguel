@@ -113,49 +113,35 @@
     </div>
   </header>
 
-  <!-- ─── COMEÇO ─── -->
-  <section class="comeco">
-    <div class="comeco-content">
-      <div class="badge-pill">
-        <span class="badge-dot"></span> Nem tudo é só código
-      </div>
-      <h1 class="comeco-title">
-        Olá, meu nome é<span class="ctt-titulo-2"> Miguel</span>,<br>
-        Seja bem vindo ao meu portfólio
-      </h1>
-      <p class="comeco-sub">Sou desenvolvedor web com 2 anos de muito estudo, transformando ideias em sites e sistemas reais, com código limpo, atenção aos detalhes e muita vontade de aprender.</p>
-      <div class="comeco-actions">
-        <!-- BOTÃO --> 
-        <a class="cssbuttons-io" href="https://wa.me/5531982579306" target="_blank">
-          <span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
-              <path d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5"/>
-              <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z"/>
-            </svg>
-            Quero te conhecer
-          </span>
-        </a>
 
-        <div class="comeco-trust">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="#BB6FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          <span>Feito com Html, Css,Javascript e Claude.ia</span>
-        </div>
-      </div>
-    </div>
+<!-- ─── HERO / COMEÇO ─── -->
+<section class="comeco">
 
-    <!-- ─── FOTO REDONDA ─── -->
-    <div class="envolta-foto">
-      <div class="anel-foto">
-        <div class="img-principal">
-          <img src="imgs/eu2.jpg" alt="Miguel" />
-        </div>
-        <div class="card-foto">
-          <div class="titulo-foto">// Status</div>
-          <div class="subtitulo-foto">Full-Stack ✓</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="hero-titulo-fundo">
+    <h1 class="comeco-title">PORTFÓLIO</h1>
+  </div>
+
+  <div class="hero-foto">
+    <img src="imgs/miguel.png" alt="Miguel — Desenvolvedor Web">
+  </div>
+
+  <!-- Conteúdo inferior esquerdo -->
+  <div class="hero-info">
+    <span class="hero-etiqueta">Full-Stack Developer <br>and Web Developer</span>
+    <p class="comeco-sub">Sou desenvolvedor web com 2 anos de muito estudo, transformando ideias em sites e sistemas reais,</p>
+    <a class="cssbuttons-io" href="https://wa.me/5531982579306?text=Ol%C3%A1%21%20Conheci%20seu%20portf%C3%B3lio%20e%20gostaria%20de%20conversar%20melhor%20com%20voc%C3%AA" target="_blank" rel="noopener noreferrer">
+      <span>Vamos conversar ↗</span>
+    </a>
+  </div>
+
+  <!-- Conteúdo inferior direito -->
+  <div class="hero-detalhes">
+    <span class="hero-detalhes-titulo"> Com código limpo, atenção <br>aos detalhes e muita vontade de aprender.</span>
+    <span class="hero-status">
+      <span class="badge-dot"></span>Feito com Html, Css e Javascript.</span>
+  </div>
+
+</section>
 
   <!-- ─── SOBRE ─── -->
   <section id="about" class="section-experiencia">
@@ -237,7 +223,7 @@
 
         <div class="project-card">
           <div class="project-img-wrap">
-              <img src="https://images.unsplash.com/photo-1493256338651-d82f7acb2b38?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Sistema para Barbearia" loading="lazy" />
+              <img src="imgs/barber_pro.jpg" alt="Sistema para Barbearia" loading="lazy" />
           </div>
           <div class="project-overlay">
               <span class="project-tag">App - Sistema Web</span>
@@ -252,9 +238,9 @@
         <div class="project-card">
           <div class="project-img-wrap"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="Analytics" loading="lazy" /></div>
           <div class="project-overlay">
-            <span class="project-tag">FULL-STACK</span>
-            <h4>FeinControl</h4>
-            <p>Sistema completo de controle financeiro pessoal com dashboard interativo, relatórios, metas financeiras e gerenciamento de receitas e despesas.</p>
+            <span class="project-tag">Aplicações Web e Gestão Inteligente</span>
+            <h4>NEXUS — Operations Platform</h4>
+            <p>Plataforma de gerenciamento de projetos e equipes, desenvolvida com React, com foco em produtividade, colaboração, componentização e gerenciamento de estado em uma aplicação SaaS interativa.</p>
             <a href="projetos/financias/index.html" class="btn-outline-sm" target="_blank">Ver projeto →</a>
           </div>
         </div>
@@ -262,9 +248,9 @@
         <div class="project-card">
           <div class="project-img-wrap"><img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1168&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Site clinica" loading="lazy" /></div>
           <div class="project-overlay">
-            <span class="project-tag">Institucional</span>
-            <h4>Site de uma clínica</h4>
-            <p>Sistema de gestão clínica com agendamento de consultas, cadastro de pacientes e controle completo de atendimentos.</p>
+            <span class="project-tag">Front-end e Ferramentas Interativas</span>
+            <h4>FORGE — Visual Website Builder</h4>
+            <p>Editor visual de websites desenvolvido com Angular e TypeScript, permitindo criar, personalizar e organizar páginas em tempo real, com foco em interatividade e experiência do usuário.</p>
             <a href="projetos/clinica/page/clinica.html" class="btn-outline-sm" target="_blank">Ver projeto →</a>
           </div>
         </div>
@@ -272,9 +258,9 @@
         <div class="project-card">
           <div class="project-img-wrap"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=80" alt="API" loading="lazy" /></div>
           <div class="project-overlay">
-            <span class="project-tag">PHP • UI/UX Design</span>
-            <h4>AccessHub</h4>
-            <p>Sistema moderno de autenticação de usuários com login, cadastro, recuperação de acesso e gerenciamento de sessões.</p>
+            <span class="project-tag">Dev. Mobile e Experiência Digital</span>
+            <h4>PULSE — Personal Finance</h4>
+            <p>Aplicativo mobile de organização financeira pessoal, desenvolvido para acompanhar gastos, controlar receitas, definir metas e visualizar hábitos financeiros, com foco em praticidade e experiência mobile-first.</p>
             <a href="projetos/login/login.html" class="btn-outline-sm" target="_blank">Ver projeto →</a>
           </div>
         </div>
