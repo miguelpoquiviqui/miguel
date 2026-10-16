@@ -73,38 +73,76 @@
  .mobile-nav .btn-primary { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, var(--purple-dark), var(--purple)); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; font-size: .95rem; padding: 14px 28px; border-radius: 999px; border: none; cursor: pointer; transition: var(--transition); box-shadow: 0 4px 24px rgba(124,58,237,.4); margin-top: 8px; }
  .mobile-nav .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(124,58,237,.6); }
  
- /* ─── COMEÇO ─── */
- .comeco { min-height: 100vh; display: flex; align-items: center; padding: 120px 24px 80px; position: relative; overflow: hidden; max-width: 1180px; margin: 0 auto; gap: 64px; }
- .comeco::before { content:''; position:fixed; top:-200px; right:-200px; width:700px; height:700px; background:radial-gradient(circle,rgba(124,58,237,.18) 0%,transparent 65%); pointer-events:none; z-index:0; }
- .comeco-content { position: relative; z-index: 2; flex: 1 1 500px; min-width: 0; }
- .comeco-title { font-size: clamp(2.2rem, 4.5vw, 3.8rem); font-weight: 700; line-height: 1.1; margin-bottom: 20px; letter-spacing: -.01em; }
- .comeco-sub { color: var(--gray); font-size: 1rem; max-width: 520px; margin-bottom: 40px; line-height: 1.7; }
- .comeco-actions { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
- .comeco-trust { display: flex; align-items: center; gap: 8px; color: var(--gray); font-size: .88rem; }
- /* TÍTULO H1 "MIGUEL" */ 
-.ctt-titulo-2 { font-family:'Syne',sans-serif; font-size:clamp(2rem,4.5vw,3.2rem); font-weight: 720; text-transform:uppercase; margin-bottom:20px; background:linear-gradient(90deg,#fff,var(--purple-dark),#fff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; background-size:200%; animation:shimmer 4s linear infinite; }
-@keyframes shimmer { from{background-position:0% 50%} to{background-position:200% 50%} }
-  /* BOTÃO NO COMEÇO "QUERO TE CONHECER" */ 
-.cssbuttons-io { position: relative; font-family: inherit; font-weight: 500; font-size: 17px; letter-spacing: 0.05em; border-radius: 0.8em; cursor: pointer; border: none; background: linear-gradient(to right, #8e2de2, #4a00e0); color: ghostwhite; overflow: hidden; }
-.cssbuttons-io svg { width: 1.2em; height: 1.2em; margin-right: 0.5em; }
-.cssbuttons-io span { position: relative; z-index: 10; transition: color 0.4s; display: inline-flex; align-items: center; padding: 0.8em 1.2em 0.8em 1.05em; }
-.cssbuttons-io::before,
-.cssbuttons-io::after { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; }
-.cssbuttons-io::before { content: ""; background: #9370DB; width: 120%; left: -10%; transform: skew(30deg); transition: transform 0.4s cubic-bezier(0.3, 1, 0.8, 1); }
-.cssbuttons-io:hover::before { transform: translate3d(100%, 0, 0); }  
 
- /* ─── FOTO REDONDA ─── */
- .envolta-foto { position: relative; z-index: 2; flex: 0 0 300px; display: flex; align-items: center; justify-content: center; }
- .anel-foto { position: relative; width: 300px; height: 300px; }
- .anel-foto::before { content:''; position:absolute; inset:-12px; border-radius:50%; border:2px dashed rgba(187,111,255,.35); animation:spin-ring 20s linear infinite; }
- .anel-foto::after { content:''; position:absolute; inset:-5px; border-radius:50%; background:conic-gradient(from 0deg, transparent 55%, rgba(187,111,255,.65) 80%, transparent 100%); animation:spin-ring 4.5s linear infinite; }
- @keyframes spin-ring { to { transform: rotate(360deg); } }
- .img-principal { width:300px; height:300px; border-radius:50%; overflow:hidden; border:3px solid rgba(187,111,255,.45); box-shadow:0 0 64px rgba(187,111,255,.22), 0 0 120px rgba(124,58,237,.12); position:relative; z-index:2; }
- .img-principal img { width:100%; height:100%; object-fit:cover; object-position: center 30%; }
- .card-foto { position:absolute; bottom:12px; right:-20px; background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:10px 16px; font-family:'JetBrains Mono',monospace; z-index:3; box-shadow:0 8px 32px rgba(0,0,0,.5); }
- .titulo-foto { color:var(--muted); font-size:.65rem; text-transform:uppercase; letter-spacing:.1em; margin-bottom:3px; }
- .subtitulo-foto { color:var(--accent); font-weight:700; font-size:.88rem; }
- 
+/* ─── HERO / COMEÇO ─── */
+.comeco { width: 100%; min-height: 100vh; position: relative; overflow: hidden; isolation: isolate; background: var(--bg, #0b0a10); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0 auto; padding: 100px 5% 180px; }
+.comeco::before { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(ellipse at 50% 45%, rgba(124, 58, 237, 0.18), transparent 55%), radial-gradient(circle at 85% 15%, rgba(187, 111, 255, 0.09), transparent 35%); }
+
+/* ─── TÍTULO GIGANTE ─── */
+.hero-titulo-fundo { position: absolute; top: 50%; left: 50%; width: 100%; transform: translate(-50%, -57%); z-index: 1; pointer-events: none; }
+.comeco-title { width: 100%; margin: 0; padding: 0; text-align: center; white-space: nowrap; font-family: "Impact", "Arial Narrow", sans-serif; font-size: clamp(90px, 20vw, 260px); font-weight: 900; line-height: 9; letter-spacing: 15px; color: var(--purple-dark); text-transform: uppercase; transform: scaleX(0.82); }
+
+/* ─── FOTO PRINCIPAL ─── */
+.hero-foto { position: absolute; z-index: 2; left: 50%; bottom: 0; transform: translateX(-50%); width: min(98vw, 660px); height: 132%; display: flex; align-items: flex-end; justify-content: center; pointer-events: none; }
+.hero-foto img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center bottom; filter: contrast(1.04) brightness(0.9); -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 85%, transparent 100%); mask-image: linear-gradient(to bottom, #000 0%, #000 85%, transparent 100%); }
+
+/* ─── INFORMAÇÕES INFERIORES ─── */
+.hero-info { position: absolute; z-index: 4; left: 5%; bottom: 45px; width: 230px; }
+.hero-etiqueta { display: block; font-family: "JetBrains Mono", monospace; font-size: 15px; line-height: 1.3; letter-spacing: 0.04em; font-weight: 700; color: #BB6FFF; margin-bottom: 14px; }
+.comeco-sub { max-width: 225px; margin: 0 0 20px; color: var(--gray, #a5a0b5); font-size: 11px; line-height: 1.7; }
+
+/* ─── BOTÃO ROXO ─── */
+.cssbuttons-io { display: inline-flex; position: relative; overflow: hidden; align-items: center; justify-content: center; border: 1px solid #BB6FFF; border-radius: 0.8em; background: linear-gradient(to right, #8e2de2, #4a00e0); color: #fff; text-decoration: none; font-family: inherit; font-size: 12px; font-weight: 600; letter-spacing: 0.04em; cursor: pointer; transition: border-color 0.3s ease; }
+.cssbuttons-io span { position: relative; z-index: 2; display: inline-flex; align-items: center; padding: 12px 16px; color: #fff; }
+.cssbuttons-io::before { content: ""; position: absolute; inset: 0; background: #BB6FFF; transform: translateX(-101%); transition: transform 0.35s ease; }
+.cssbuttons-io:hover::before { transform: translateX(0); }
+.cssbuttons-io:hover { border-color: #BB6FFF; }
+
+/* ─── INFORMAÇÕES À DIREITA ─── */
+.hero-detalhes { position: absolute; z-index: 4; right: 5%; bottom: 48px; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; width: 170px; }
+.hero-detalhes-titulo { font-family: "JetBrains Mono", monospace; font-size: 9px; line-height: 1.7; letter-spacing: 0.04em; color: var(--gray, #a5a0b5); }
+.hero-status { display: flex; align-items: center; gap: 7px; font-family: "JetBrains Mono", monospace; font-size: 8px; line-height: 1.5; letter-spacing: 0.02em; color: var(--gray, #a5a0b5); }
+.badge-dot { display: inline-block; flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background: #BB6FFF; box-shadow: 0 0 8px rgba(187, 111, 255, 0.7); }
+
+/* ─── RESPONSIVIDADE ─── */
+@media (min-width: 1500px) {
+  .comeco-title { font-size: 280px; }
+}
+
+@media (max-width: 900px) {
+  .comeco { min-height: 850px; padding: 100px 4% 190px; }
+  .comeco-title { font-size: 19vw; }
+  .hero-foto { width: min(65vw, 500px); height: 72%; }
+  .hero-info { left: 4%; bottom: 35px; }
+  .hero-detalhes { right: 4%; bottom: 35px; }
+}
+
+@media (max-width: 600px) {
+  .comeco { min-height: 780px; height: 100svh; max-height: 950px; padding: 100px 20px 210px; }
+  .hero-topo { top: 22px; left: 20px; right: 20px; }
+  .hero-monograma { font-size: 24px; }
+  .hero-marca { font-size: 8px; }
+  .hero-ano::before { width: 20px; margin-right: 8px; }
+  .hero-titulo-fundo { top: 39%; transform: translate(-50%, -50%); }
+  .comeco-title { font-size: 19vw; letter-spacing: -0.06em; transform: scaleX(0.9); }
+  .hero-foto { width: 100%; height: 64%; bottom: 145px; }
+  .hero-info { left: 20px; bottom: 24px; width: 55%; }
+  .hero-etiqueta { font-size: 12px; margin-bottom: 8px; }
+  .comeco-sub { font-size: 10px; line-height: 1.5; margin-bottom: 12px; }
+  .cssbuttons-io span { padding: 10px 12px; font-size: 11px; }
+  .hero-detalhes { right: 20px; bottom: 30px; width: 36%; gap: 16px; }
+  .hero-detalhes-titulo { font-size: 8px; }
+  .hero-status { font-size: 7px; gap: 5px; }
+}
+
+@media (max-width: 380px) {
+  .comeco { min-height: 720px; }
+  .hero-foto { height: 58%; bottom: 160px; }
+  .hero-info { width: 53%; }
+  .hero-detalhes { width: 35%; }
+  .hero-status { font-size: 6px; }
+}
+
  /* ─── EXPERIENCIA ─── */
  .section-experiencia { padding: 100px 0; }
  .experiencia-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 72px; align-items: center; }
