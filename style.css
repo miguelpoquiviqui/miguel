@@ -111,7 +111,7 @@
 
 @media (max-width: 900px) {
   .comeco { min-height: 850px; padding: 100px 4% 190px; }
-  .comeco-title { font-size: 19vw; }
+  .comeco-title { font-size: 30vw; }
   .hero-foto { width: min(65vw, 500px); height: 72%; }
   .hero-info { left: 4%; bottom: 35px; }
   .hero-detalhes { right: 4%; bottom: 35px; }
@@ -124,7 +124,7 @@
   .hero-marca { font-size: 8px; }
   .hero-ano::before { width: 20px; margin-right: 8px; }
   .hero-titulo-fundo { top: 39%; transform: translate(-50%, -50%); }
-  .comeco-title { font-size: 19vw; letter-spacing: -0.06em; transform: scaleX(0.9); }
+  .comeco-title { font-size: 30vw; letter-spacing: -0.06em; transform: scaleX(0.9); }
   .hero-foto { width: 100%; height: 64%; bottom: 145px; }
   .hero-info { left: 20px; bottom: 24px; width: 55%; }
   .hero-etiqueta { font-size: 12px; margin-bottom: 8px; }
@@ -280,7 +280,7 @@
   /* começo */
   .comeco { flex-direction: column-reverse; padding: 100px 20px 60px; gap: 36px; align-items: center; text-align: center; min-height: unset; }
   .comeco-content { flex: unset; width: 100%; }
-  .comeco-title { font-size: clamp(1.8rem, 7vw, 2.4rem); }
+  .comeco-title { font-size: 6rem !important; line-height: 0.9; margin-top: -70px; width: 100%; overflow-wrap: break-word;}
   .comeco-sub { margin: 0 auto 28px; }
   .comeco-actions { justify-content: center; flex-direction: column; align-items: center; gap: 16px; }
   .envolta-foto { flex: unset; }
